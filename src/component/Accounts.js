@@ -5,8 +5,8 @@ import './Accounts.css';
 
 export default class Accounts extends React.Component {
     render(){
-      const {Acco} = this.props;
-      const arrayelem = Acco.map((item)=>{
+      const {Scorelist} = this.props;
+      const arrayelem = Scorelist.map((item)=>{
       const {id, ...itemProps} = item;
 
       return (

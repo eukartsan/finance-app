@@ -13,22 +13,30 @@ export default class Operation extends React.Component {
 
 const OperationAccounts = () =>{
   return (
-    <input placeholder="Сумма"/>
+    <input placeholder="Amount"/>
   );
 };
 
 const Profit = () =>{
   return (
     <div className="btn">
-      <button type="button">Доход</button>
+      <button onClick={funcPlus}>Income (+)</button>
     </div>
   );
 };
 
+function funcPlus(){
+  console.log('+');
+}
+
 const Costs = () =>{
   return (
     <div className="btn">
-    <button type="button">Расход</button>
+    <button onClick={funcMinus}>Expense (-)</button>
     </div>
   );
 };
+
+function funcMinus(){
+  console.log('-');
+}
