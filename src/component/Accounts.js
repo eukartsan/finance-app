@@ -33,7 +33,7 @@ export default class Accounts extends React.Component {
     }
 
     render() {
-        const {accountsList} = this.props,
+        const {accountsList, onDeleted} = this.props,
             {accountLabel} = this.state
 
         const account = accountsList.map((item) => {
@@ -43,7 +43,9 @@ export default class Accounts extends React.Component {
                 <li key={id} className="account-list list-group-item">
                     <span>
                         {label} : {total} UAH
+                      <button className="d-flex float-right" onClick={onDeleted}>Delete</button>
                     </span>
+
                 </li>
             );
         });

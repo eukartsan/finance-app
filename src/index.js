@@ -33,6 +33,12 @@ export default class App extends React.Component {
         this.setState({accounts: [...accounts, accountObj]});
     }
 
+    deleteItem = (id) => {
+      console.log(id);
+    };
+
+
+
 render() {
     const {accounts} = this.state;
 
@@ -40,7 +46,7 @@ render() {
         <div className="app-header">
             <h1>Income and expense accounting application</h1>
             <h3>Balance</h3>
-            <Accounts accountsList={accounts} addAccount={this.addAccount}/>
+            <Accounts accountsList={accounts} addAccount={this.addAccount} onDeleted={this.deleteItem}/>
             <h3>Account transactions: </h3>
             <Operation/>
             <Scoretransfer/>
