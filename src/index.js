@@ -26,7 +26,7 @@ export default class App extends React.Component {
             accountObj = {
                 label,
                 total: '0',
-                id: ++maxId,
+                id: this.maxId++,
                 active: false
             }
 
@@ -34,9 +34,21 @@ export default class App extends React.Component {
     }
 
     deleteItem = (id) => {
-      console.log(id);
-    };
+      const {accounts} = this.state;
 
+          this.setState( ({accounts}) => {
+            const idx = accounts.findIndex((el) => el.id === id);
+
+            const newArray = [
+              ...accounts.slice(0, idx),
+              ...accounts.slice(idx + 1)
+            ];
+
+            return {
+              accounts: newArray
+            };
+        });
+        }
 
 
 render() {
@@ -53,6 +65,7 @@ render() {
         </div>
     );
 }
+
 }
 
 
