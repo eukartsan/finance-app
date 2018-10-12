@@ -42,9 +42,10 @@ export default class Accounts extends React.Component {
             return (
                 <li key={id} className="account-list list-group-item">
                     <span>
-                        {label} : {total} UAH
-                      <button className="d-flex float-right" onClick={onDeleted}>Delete</button>
+                        {label} : {total}  UAH
+                        <button className="d-flex float-right" onClick={onDeleted}>Delete</button>
                     </span>
+
 
                 </li>
             );
