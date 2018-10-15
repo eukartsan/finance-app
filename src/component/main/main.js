@@ -17,8 +17,8 @@ export default class App extends React.Component {
             transactions: [
                 {
                     datetime: '20.12.32',
-                    account_id: 'f19947e9-0638-4080-9706-900c8fd01c9d',
                     amount: 100.12,
+                    account_id: 'f19947e9-0638-4080-9706-900c8fd01c9d',
                     isIncome: false,
                     comment: 'my first income'
                 },
@@ -70,6 +70,21 @@ export default class App extends React.Component {
         })
     }
 
+    selectAccount = (amount, accountId) => {
+      console.log(accountId, 'accoundId')
+      this.setState((prevState) => {
+        const transactionsIncome = {
+          account_id: accountId,
+          amount,
+          isIncome: true,
+        }
+
+        return {
+          transactions: [...prevState.transactions, transactionsIncome]
+        };
+      })
+    }
+
     render() {
         const {accounts} = this.state;
 
@@ -85,7 +100,8 @@ export default class App extends React.Component {
                     setAccountActive={this.setAccountActive}
                 />
                 <h3>Account transactions: </h3>
-                <Operation accountsList={accounts}/>
+                <Operation accountsList={accounts}
+                onSelectAccount={this.selectAccount}/>
             </div>
         );
     }
