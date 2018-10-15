@@ -15,6 +15,18 @@ export default class Operation extends React.Component {
   }
 
   addIncome = () => {
+    const dateTime = Date(Date.now());
+    const {amount, accountId} = this.state;
+    this.props.onSelectAccount(amount, accountId, dateTime);
+    this.selectElem.value = null
+    this.setState({
+      amount: '',
+      accountId: null
+    })
+  }
+
+  addExpense = () => {
+    const dateTime = Date(Date.now());
     const {amount, accountId} = this.state;
     this.props.onSelectAccount(amount, accountId);
     this.selectElem.value = null
@@ -24,17 +36,7 @@ export default class Operation extends React.Component {
     })
   }
 
-  addExpense = () => {
-      console.log('-');
-  }
 
-  onSelectAccount = (event) => {
-      const searchQuery = event.target.value.toLowerCase();
-      this.props.onSelectAccount(searchQuery);
-      this.setState({
-        searchValue: event.target.value
-      });
-  }
 
     selectAccount = (event) => {
       this.setState({
