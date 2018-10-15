@@ -10,6 +10,10 @@ export default class Operation extends React.Component {
       }
   }
 
+  componentDidMount() {
+      this.selectElem.value = null
+  }
+
   addIncome = () => {
     const {amount, accountId} = this.state;
     this.props.onSelectAccount(amount, accountId);
@@ -65,18 +69,17 @@ export default class Operation extends React.Component {
       })
     }
 
-
     render() {
-      const {amount} = this.state
+      const {amount, accountId} = this.state;
         return (
             <div>
                 {this.accountsList()}
                 <input placeholder="Amount" value={amount} onChange={this.changeAmount}/>
                 <div className="btn">
-                    <button onClick={this.addIncome}>Income (+)</button>
+                    <button onClick={this.addIncome} disabled={amount === '' || accountId === null}>Income (+)</button>
                 </div>
                 <div className="btn">
-                    <button onClick={this.addExpense}>Expense (-)</button>
+                    <button onClick={this.addExpense} disabled={amount === '' || accountId === null}>Expense (-)</button>
                 </div>
             </div>
         )
