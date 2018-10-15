@@ -1,69 +1,93 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-
 import Operation from '../Operation';
 import Accounts from '../Accounts';
-import Scoretransfer from '../Scoretransfer';
 import './main.css';
+import uuidv4 from 'uuid/v4';
 
 export default class App extends React.Component {
     constructor() {
         super()
 
-  this.state = {
-    accounts: [
-      {label: 'Score 1', total: '0', id: 1},
-      {label: 'Score 2', total: '20', id: 2},
-      {label: 'Score 3', total: '100', id: 3}
-    ]
-  }
-}
+        this.state = {
+            accounts: [
+                {accountName: 'Score 1', total: '0', id: uuidv4(), active: false},
+                {accountName: 'Score 2', total: '20', id: uuidv4(), active: false},
+                {accountName: 'Score 3', total: '100', id: uuidv4(), active: false},
+            ],
+            transactions: [
+                {
+                    datetime: '20.12.32',
+                    account_id: 'f19947e9-0638-4080-9706-900c8fd01c9d',
+                    amount: 100.12,
+                    isIncome: false,
+                    comment: 'my first income'
+                },
+            ]
+        }
+    }
 
-    addAccount = (label) => {
-        const {accounts} = this.state;
-
-        let maxId =  Math.max(...accounts.map((account) => account.id), 0),
-            accountObj = {
-                label,
+    addAccount = (accountName) => {
+        this.setState((prevState) => {
+            const accountObj = {
+                accountName,
                 total: '0',
-                id: this.maxId++,
-                active: false
+                id: uuidv4(),
+                active: false,
             }
 
-        this.setState({accounts: [...accounts, accountObj]});
+            return {
+                accounts: [...prevState.accounts, accountObj]
+            };
+        })
     }
 
     deleteItem = (id) => {
-      const {accounts} = this.state;
-
-          this.setState( ({accounts}) => {
-            const idx = accounts.findIndex(el => el.id != id);
-
-            const newArray = [
-              ...accounts.slice(0, idx),
-              ...accounts.slice(idx + 1)
-            ];
-
+        this.setState((prevState) => {
             return {
-              accounts: newArray
+                accounts: prevState.accounts.filter(el => el.id !== id)
             };
-        });
-        }
+        })
+    }
 
+    editAccount = (accountName, id) => {
+        const accountsCopy = [...this.state.accounts];
+        const prevAccount = accountsCopy.find(prevAccount => prevAccount.id === id);
+        prevAccount.accountName = accountName;
 
-render() {
-    const {accounts} = this.state;
+        this.setState({
+            accounts: accountsCopy
+        })
+    }
 
-    return (
-        <div className="app-header">
-            <h1>Income and expense accounting application</h1>
-            <h3>Balance</h3>
-            <Accounts accountsList={accounts} addAccount={this.addAccount} onDeleted={this.deleteItem}/>
-            <h3>Account transactions: </h3>
-            <Operation/>
-            <Scoretransfer/>
-        </div>
-    );
-}
+    setAccountActive = (id) => {
+        const accountsCopy = [...this.state.accounts];
+        const prevAccount = accountsCopy.find(prevAccount => prevAccount.id === id);
+        console.log(prevAccount, 'prevAccount')
+        prevAccount.active = !prevAccount.active;
+
+        this.setState({
+            accounts: accountsCopy
+        })
+    }
+
+    render() {
+        const {accounts} = this.state;
+
+        return (
+            <div className="app-header">
+                <h1>Income and expense accounting application</h1>
+                <h3>Balance</h3>
+                <Accounts
+                    accountsList={accounts}
+                    addAccount={this.addAccount}
+                    onDeleted={this.deleteItem}
+                    editAccountName={this.editAccount}
+                    setAccountActive={this.setAccountActive}
+                />
+                <h3>Account transactions: </h3>
+                <Operation accountsList={accounts}/>
+            </div>
+        );
+    }
 
 }

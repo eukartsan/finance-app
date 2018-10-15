@@ -8,44 +8,86 @@ export default class Accounts extends React.Component {
         super()
 
         this.state = {
-            accountLabel: ''
+            accountName: ''
         };
-
     }
 
-    addAccountLabel = (event) => {
+    addAccountName = (event) => {
         const {addAccount} = this.props,
-            {accountLabel} = this.state;
+            {accountName} = this.state;
 
         event.preventDefault();
 
-        addAccount(accountLabel)
+        addAccount(accountName)
 
         this.setState({
-            accountLabel: ''
+            accountName: ''
         })
     }
 
     handleChange = (event) => {
         this.setState({
-            accountLabel: event.target.value
+            accountName: event.target.value
         });
     }
 
+    deleteAccount = (id) => (event) => {
+        event.preventDefault();
+
+        const {onDeleted} = this.props
+
+        onDeleted(id);
+    }
+
+    editAccountName = (id) => (event) => {
+        const {editAccountName} = this.props;
+
+        editAccountName(event.target.value, id)
+    }
+
+    setActive = (id) => (event) => {
+        const {setAccountActive} = this.props;
+        event.preventDefault();
+        setAccountActive(id);
+    }
+
     render() {
-        const {accountsList, onDeleted} = this.props,
-            {accountLabel} = this.state
+        const {accountsList} = this.props,
+            {accountName} = this.state
 
         const account = accountsList.map((item) => {
-            const {id, label, total} = item;
+            const {id, accountName: accountItemName, total, active} = item;
 
             return (
                 <li key={id} className="account-list list-group-item">
-                    <span>
-                        {label} : {total}  UAH
-                        <button className="d-flex float-right" onClick={onDeleted}>Delete</button>
+                    {active
+                        ?
+                        <label>
+                            <input
+                                name="accountName"
+                                type="text"
+                                value={accountItemName}
+                                onChange={this.editAccountName(id)}
+                            />: {total} UAH
+                            <button
+                                className="d-flex float-right"
+                                onClick={this.setActive(id)}
+                            >
+                                Exit
+                            </button>
+                            <button
+                                className="d-flex float-right"
+                                onClick={this.deleteAccount(id)}
+                            >
+                                Delete
+                            </button>
+                        </label>
+                        : <span>
+                        {accountItemName} : {total} UAH
+                        <button className="d-flex float-right" onClick={this.setActive(id)}>Edit</button>
+                        <button className="d-flex float-right" onClick={this.deleteAccount(id)}>Delete</button>
                     </span>
-
+                    }
 
                 </li>
             );
@@ -54,10 +96,10 @@ export default class Accounts extends React.Component {
         return (
             <Fragment>
                 <div>
-                    <form onSubmit={this.addAccountLabel}>
+                    <form onSubmit={this.addAccountName}>
                         <label>
                             Account name:
-                            <input type="text" value={accountLabel} onChange={this.handleChange}/>
+                            <input name="newAccountName" type="text" value={accountName} onChange={this.handleChange}/>
                         </label>
                         <input type="submit" value="Submit"/>
                     </form>
