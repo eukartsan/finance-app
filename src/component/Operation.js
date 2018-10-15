@@ -8,23 +8,15 @@ const funcMinus = () => {
     console.log('-');
 }
 
-const elemSearch: function(event) {
-    const searchQuery = event.target.value.toLowerCase();
-    this.props.onelemSearch(searchQuery);
-    this.setState({
-      searchValue: event.target.value
-    });
-  },
+
 
 export default class Operation extends React.Component {
     accountsList() {
         const {accountsList} = this.props;
         const accountsName = accountsList.map((account) => {
             const {accountName, id} = account;
-
-
             return (
-                <option key={id} onChange={this.elemSearch}>
+                <option key={id}>
                     {accountName}
                 </option>
             )
