@@ -15,11 +15,8 @@ export default class Accounts extends React.Component {
     addAccountName = (event) => {
         const {addAccount} = this.props,
             {accountName} = this.state;
-
         event.preventDefault();
-
         addAccount(accountName)
-
         this.setState({
             accountName: ''
         })
@@ -33,15 +30,12 @@ export default class Accounts extends React.Component {
 
     deleteAccount = (id) => (event) => {
         event.preventDefault();
-
         const {onDeleted} = this.props
-
         onDeleted(id);
     }
 
     editAccountName = (id) => (event) => {
         const {editAccountName} = this.props;
-
         editAccountName(event.target.value, id)
     }
 

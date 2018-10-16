@@ -71,7 +71,6 @@ export default class App extends React.Component {
     }
 
     selectAccount = (amount, accountId, dateTime) => {
-      console.log(accountId, 'accoundId')
       this.setState((prevState) => {
         const transactionsIncome = {
           account_id: accountId,

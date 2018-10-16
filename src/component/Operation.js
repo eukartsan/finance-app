@@ -25,6 +25,13 @@ export default class Operation extends React.Component {
     })
   }
 
+  amountOnRegular = () => {
+    const {amount} = this.state;
+    const reg = /[\d.^0-9.,]/g;
+    const found = amount.match(reg);
+    console.log(found, 'found')
+  }
+
   addExpense = () => {
     const dateTime = Date(Date.now());
     const {amount, accountId} = this.state;
@@ -35,8 +42,6 @@ export default class Operation extends React.Component {
       accountId: null
     })
   }
-
-
 
     selectAccount = (event) => {
       this.setState({
@@ -78,7 +83,7 @@ export default class Operation extends React.Component {
                 {this.accountsList()}
                 <input placeholder="Amount" value={amount} onChange={this.changeAmount}/>
                 <div className="btn">
-                    <button onClick={this.addIncome} disabled={amount === '' || accountId === null}>Income (+)</button>
+                    <button onClick={this.addExpense, this.amountOnRegular} disabled={amount === '' || accountId === null}>Income (+)</button>
                 </div>
                 <div className="btn">
                     <button onClick={this.addExpense} disabled={amount === '' || accountId === null}>Expense (-)</button>
