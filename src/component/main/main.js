@@ -70,13 +70,14 @@ export default class App extends React.Component {
         })
     }
 
-    selectAccount = (amount, accountId, dateTime) => {
+    selectAccount = (amount, accountId, dateTime, commentValue) => {
       this.setState((prevState) => {
         const transactionsIncome = {
           account_id: accountId,
           amount,
           isIncome: true,
-          datetime: dateTime
+          datetime: dateTime,
+          comment: commentValue
         }
 
         return {
@@ -101,7 +102,8 @@ export default class App extends React.Component {
                 />
                 <h3>Account transactions: </h3>
                 <Operation accountsList={accounts}
-                onSelectAccount={this.selectAccount}/>
+                onSelectAccount={this.selectAccount}
+                />
             </div>
         );
     }

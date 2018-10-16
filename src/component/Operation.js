@@ -6,7 +6,8 @@ export default class Operation extends React.Component {
 
       this.state = {
         amount: '',
-        accountId: null
+        accountId: null,
+        commentValue: ''
       }
   }
 
@@ -16,8 +17,8 @@ export default class Operation extends React.Component {
 
   addIncome = () => {
     const dateTime = Date(Date.now());
-    const {amount, accountId} = this.state;
-    this.props.onSelectAccount(amount, accountId, dateTime);
+    const {amount, accountId, commentValue} = this.state;
+    this.props.onSelectAccount(amount, accountId, dateTime, commentValue);
     this.selectElem.value = null
     this.setState({
       amount: '',
@@ -27,9 +28,10 @@ export default class Operation extends React.Component {
 
   amountOnRegular = () => {
     const {amount} = this.state;
-    const reg = /[\d.^0-9.,]/g;
+    const reg = /[.^0-9.,]/g;
     const found = amount.match(reg);
     console.log(found, 'found')
+
   }
 
   addExpense = () => {
@@ -76,17 +78,26 @@ export default class Operation extends React.Component {
       })
     }
 
+    addComment = (event) => {
+        this.setState({
+          commentValue: event.target.value
+        })
+    }
+
     render() {
-      const {amount, accountId} = this.state;
+      const {amount, accountId, commentValue} = this.state;
         return (
             <div>
                 {this.accountsList()}
                 <input placeholder="Amount" value={amount} onChange={this.changeAmount}/>
                 <div className="btn">
-                    <button onClick={this.addExpense, this.amountOnRegular} disabled={amount === '' || accountId === null}>Income (+)</button>
+                    <button onClick={this.addIncome} disabled={amount === '' || accountId === null}>Income (+)</button>
                 </div>
                 <div className="btn">
                     <button onClick={this.addExpense} disabled={amount === '' || accountId === null}>Expense (-)</button>
+                </div>
+                <div className="float-right">
+                  <textarea placeholder="Comment" value={commentValue} onChange={this.addComment}></textarea>
                 </div>
             </div>
         )
