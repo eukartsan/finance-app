@@ -1,16 +1,21 @@
 import React from 'react';
+import './Historytransactions.css';
+
 
 const Historytransactions = (props) => {
 
       return (
-          <div>
-          <tr>
-              <td>{props.amount}</td>
-          </tr>
-            <tr>
-              <td>{props.accountId}</td>
-          </tr>
+        <div className="tableContainer">
+        <div className="tableElement">
+            {props.accountId}
+        </div>
+          <div className="tableElement">
+              {props.amount}
           </div>
+          <div className="tableElement">
+              {props.commentValue}
+          </div>
+        </div>
       )
   }
 

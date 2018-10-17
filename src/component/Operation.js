@@ -8,8 +8,7 @@ export default class Operation extends React.Component {
 
       this.state = {
         amount: '',
-        accountId: null,
-        commentValue: ''
+        accountId: null
       }
   }
 
@@ -20,15 +19,14 @@ export default class Operation extends React.Component {
   addIncome = () => {
     const dateTime = Date(Date.now());
     const {amount, accountId, commentValue} = this.state;
-    this.props.onSelectAccount(amount, accountId, dateTime, commentValue);
+//    this.props.onSelectAccount(amount, accountId, dateTime, commentValue);
     this.selectElem.value = null
     this.setState({
       amount: '',
-      accountId: null
+      accountId: null,
+      commentValue: ''
     })
-
-
-  //  console.log(amount, accountId, dateTime, commentValue, 'amount')
+   console.log(amount, accountId, dateTime, commentValue, 'amount, accountId, dateTime, commentValue')
   }
 
   amountOnRegular = () => {
@@ -90,7 +88,7 @@ export default class Operation extends React.Component {
 
 
 
-    render(transactions) {
+    render() {
       const {amount, accountId, commentValue} = this.state;
         return (
             <div>
@@ -105,10 +103,13 @@ export default class Operation extends React.Component {
                 <div className="float-right">
                   <textarea placeholder="Comment" value={commentValue} onChange={this.addComment}></textarea>
                 </div>
-                <div>
-                <Historytransactions amount={amount} accountId={accountId} label={commentValue}
+
+                <Historytransactions
+                amount={amount}
+                accountId={accountId}
+                commentValue={commentValue}
                   />
-                </div>
+
 
             </div>
 

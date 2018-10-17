@@ -1,0 +1,9 @@
+.tableContainer{
+  display: flex;
+  align-items: center;
+}
+
+.tableElement{
+  border: 1px solid;
+  margin-top: 30px;
+}
