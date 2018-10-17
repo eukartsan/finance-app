@@ -87,7 +87,7 @@ export default class App extends React.Component {
     }
 
     render() {
-        const {accounts} = this.state;
+        const {accounts, transactions} = this.state;
 
         return (
             <div className="app-header">
@@ -103,7 +103,9 @@ export default class App extends React.Component {
                 <h3>Account transactions: </h3>
                 <Operation accountsList={accounts}
                 onSelectAccount={this.selectAccount}
+              
                 />
+
             </div>
         );
     }

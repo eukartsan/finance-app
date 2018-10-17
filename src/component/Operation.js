@@ -26,6 +26,9 @@ export default class Operation extends React.Component {
       amount: '',
       accountId: null
     })
+
+
+  //  console.log(amount, accountId, dateTime, commentValue, 'amount')
   }
 
   amountOnRegular = () => {
@@ -85,7 +88,9 @@ export default class Operation extends React.Component {
         })
     }
 
-    render() {
+
+
+    render(transactions) {
       const {amount, accountId, commentValue} = this.state;
         return (
             <div>
@@ -100,7 +105,11 @@ export default class Operation extends React.Component {
                 <div className="float-right">
                   <textarea placeholder="Comment" value={commentValue} onChange={this.addComment}></textarea>
                 </div>
-                <Historytransactions />
+                <div>
+                <Historytransactions amount={amount} accountId={accountId} label={commentValue}
+                  />
+                </div>
+
             </div>
 
         )

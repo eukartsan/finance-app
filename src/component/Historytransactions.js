@@ -1,35 +1,20 @@
 import React from 'react';
 
-export default class Historytransactions extends React.Component {
-  constructor() {
-      super()
-
-      this.state = {
-        amount: '',
-        accountId: null,
-        commentValue: '',
-        accountName: ''
-      }
-  }
-
-  transactions() {
-    const {accountsList} = this.props;
-    const accountName = accountsList.map((account) => {
-        const {accountName, id} = account;
-          return (
-              <td>
-              {accountName}
-              </td>
-          )
-      })
-}
-    render() {
-
-
+const Historytransactions = (props) => {
+  const content = props.posts.map((post) =>
+      <div key={post.id}>
+        <post.amont>
+      </div>
+    );
       return (
-        <ul>
-          <li>{this.transactions()}</li>
-        </ul>
+          <div>
+          <tr>
+              <td>{props.amount}</td>
+              <td>{props.accountId}</td>
+              {content}
+          </tr>
+          </div>
       )
-    }
   }
+
+export default Historytransactions;
