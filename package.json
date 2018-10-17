@@ -5,6 +5,7 @@
   "dependencies": {
     "react": "^16.5.2",
     "react-dom": "^16.5.2",
+    "react-native-easy-grid": "^0.2.0",
     "react-scripts": "2.0.3"
   },
   "scripts": {
@@ -21,5 +22,9 @@
     "not dead",
     "not ie <= 11",
     "not op_mini all"
-  ]
+  ],
+  "devDependencies": {
+    "css-loader": "^1.0.0",
+    "style-loader": "^0.23.1"
+  }
 }

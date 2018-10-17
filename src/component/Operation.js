@@ -1,6 +1,7 @@
 import React from 'react';
 import Historytransactions from './Historytransactions';
 
+
 export default class Operation extends React.Component {
   constructor() {
       super()
@@ -36,8 +37,8 @@ export default class Operation extends React.Component {
 
   addExpense = () => {
     const dateTime = Date(Date.now());
-    const {amount, accountId} = this.state;
-    this.props.onSelectAccount(amount, accountId);
+    const {amount, accountId, commentValue} = this.state;
+    this.props.onSelectAccount(amount, accountId, dateTime, commentValue);
     this.selectElem.value = null
     this.setState({
       amount: '',
@@ -99,21 +100,7 @@ export default class Operation extends React.Component {
                 <div className="float-right">
                   <textarea placeholder="Comment" value={commentValue} onChange={this.addComment}></textarea>
                 </div>
-                <div>
-                <table>
-                  <thead>
-                  <td>
-                    <tr>{amount}</tr>
-                  </td>
-                  <td>
-                    <tr>{accountId}</tr>
-                  </td>
-                  <td>
-                    <tr>{commentValue}</tr>
-                  </td>
-                  </thead>
-                </table>
-                </div>
+                <Historytransactions />
             </div>
 
         )
