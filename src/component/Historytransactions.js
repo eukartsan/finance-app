@@ -2,18 +2,18 @@ import React from 'react';
 import './HistoryTransactions.css';
 
 export default class HistoryTransactions extends React.Component{
-render() {
-      return (
-
+render(){
+  const {amount, accountId, commentValue} = this.props
+    return(
         <div className="transanctions-container">
         <div className="tableElement">
-            {this.props.accountId}
+            {accountId}
         </div>
           <div className="tableElement">
-              {this.props.amount}
+              {amount}
           </div>
           <div className="tableElement">
-              {this.props.commentValue}
+              {commentValue}
           </div>
         </div>
       )
