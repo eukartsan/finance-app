@@ -1,22 +1,30 @@
 import React from 'react';
-import './Historytransactions.css';
+import './HistoryTransactions.css';
 
 
-const Historytransactions = (props) => {
+export default class HistoryTransactions extends React.Component{
+  constructor(props){
+    super(props);
 
+  this.state = {
+    transactions: props.transactions
+  };
+}
+
+render(){
       return (
-        <div className="tableContainer">
-        <div className="tableElement">
-            {props.accountId}
-        </div>
+
+        <div className="transanctions-container">
+
+        {this.state.transactions.map((i, index) => {
+          return
           <div className="tableElement">
-              {props.amount}
+              {i.amount}
+              {i.commentValue}
           </div>
-          <div className="tableElement">
-              {props.commentValue}
-          </div>
+        })}
         </div>
       )
-  }
+    }
 
-export default Historytransactions;
+  }

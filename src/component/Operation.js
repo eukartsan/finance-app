@@ -1,5 +1,5 @@
 import React from 'react';
-import Historytransactions from './Historytransactions';
+import HistoryTransactions from './HistoryTransactions';
 
 
 export default class Operation extends React.Component {
@@ -19,7 +19,7 @@ export default class Operation extends React.Component {
   addIncome = () => {
     const dateTime = Date(Date.now());
     const {amount, accountId, commentValue} = this.state;
-//    this.props.onSelectAccount(amount, accountId, dateTime, commentValue);
+    this.props.onSelectAccount(amount, accountId, dateTime, commentValue);
     this.selectElem.value = null
     this.setState({
       amount: '',
@@ -89,7 +89,7 @@ export default class Operation extends React.Component {
 
 
     render() {
-      const {amount, accountId, commentValue} = this.state;
+      const {amount, accountId, commentValue, transactions} = this.state;
         return (
             <div>
                 {this.accountsList()}
@@ -104,10 +104,11 @@ export default class Operation extends React.Component {
                   <textarea placeholder="Comment" value={commentValue} onChange={this.addComment}></textarea>
                 </div>
 
-                <Historytransactions
+                <HistoryTransactions
                 amount={amount}
                 accountId={accountId}
                 commentValue={commentValue}
+                transactions={transactions}
                   />
 
 
