@@ -23,16 +23,11 @@ export default class App extends React.Component {
                     comment: 'my first income'
                 },
             ],
-            categoriesInCome: [
-               {label: 'CatInCome1',  id: 1, isIncome: true},
-               {label: 'CatInCome2',  id: 2, isIncome: true},
-               {label: 'CatInCome3',  id: 3, isIncome: false}
+            categories: [
+               {label: 'CatInCome1',  id: 1},
+               {label: 'CatInCome2',  id: 2},
+               {label: 'CatInCome3',  id: 3}
            ],
-           categoriesExpense: [
-              {label: 'CatExpense1',  id: 1, isExpense: false},
-              {label: 'CatExpense2',  id: 2, isExpense: true},
-              {label: 'CatExpense3',  id: 3, isExpense: false}
-          ],
 
         }
     }
@@ -115,10 +110,8 @@ export default class App extends React.Component {
                 <Operation accountsList={accounts}
                 onSelectAccount={this.selectAccount}
                 transactions={transactions}
-                categoriesInCome={categoriesInCome}
-                categoriesExpense={categoriesExpense}
-                />
 
+                />
             </div>
         );
     }

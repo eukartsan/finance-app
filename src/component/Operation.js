@@ -1,6 +1,6 @@
 import React from 'react';
 import HistoryTransactions from './HistoryTransactions';
-import CategotyAccounts from './CategotyAccounts';
+import CategoryAccounts from './CategoryAccounts';
 
 export default class Operation extends React.Component {
   constructor() {
@@ -110,8 +110,8 @@ export default class Operation extends React.Component {
                 commentValue={commentValue}
                 transactions={transactions}
                   />
+                <CategoryAccounts />
 
-                  <CategoryAccounts />
 
             </div>
 
