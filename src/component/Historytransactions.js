@@ -6,13 +6,13 @@ render(){
   const {amount, accountId, commentValue} = this.props
     return(
         <div className="transanctions-container">
-        <div className="tableElement">
+        <div className="transaction-item">
             {accountId}
         </div>
-          <div className="tableElement">
+          <div className="transaction-item">
               {amount}
           </div>
-          <div className="tableElement">
+          <div className="transaction-item">
               {commentValue}
           </div>
         </div>

@@ -1,6 +1,6 @@
 import React from 'react';
 import HistoryTransactions from './HistoryTransactions';
-
+import CategotyAccounts from './CategotyAccounts';
 
 export default class Operation extends React.Component {
   constructor() {
@@ -111,6 +111,7 @@ export default class Operation extends React.Component {
                 transactions={transactions}
                   />
 
+                  <CategoryAccounts />
 
             </div>
 
