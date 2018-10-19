@@ -9,17 +9,12 @@ constructor() {
         CategoryValue: ''
       }
   }
+
 render(){
 const {CategoryValue} = this.state;
 
-addCategory = () => {
-  const {CategoryValue} = this.state;
-  this.setState({
-  CategoryValue:
-})
-
-}
-
+const categories = CategoryValue.map((item) => {
+    const {label} = item;
 
     return(
       <div>
@@ -28,6 +23,7 @@ addCategory = () => {
           <option>Categoty 1</option>
           <option>Categoty 2</option>
           <option>Categoty 3</option>
+          {label}
         </select>
         </div>
         <div>
@@ -37,6 +33,6 @@ addCategory = () => {
           <button className="btn" onClick={this.addCategory}>Add Category</button>
         </div>
       </div>
-      )
+    )}
   }
 }
