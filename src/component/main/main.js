@@ -1,6 +1,6 @@
 import React from 'react';
-import Operation from '../Operation';
-import Accounts from '../Accounts';
+import Operation from '../Operation/Operation';
+import Accounts from '../Accounts/Accounts';
 import uuidv4 from 'uuid/v4';
 
 export default class App extends React.Component {

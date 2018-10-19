@@ -1,6 +1,6 @@
 import React from 'react';
-import HistoryTransactions from './HistoryTransactions';
-import CategoryAccounts from './CategoryAccounts';
+import HistoryTransactions from '../HistoryTransactions/HistoryTransactions';
+import CategoryAccounts from '../CategoryAccounts/CategoryAccounts';
 import './Operation.css';
 
 export default class Operation extends React.Component {
@@ -9,7 +9,8 @@ export default class Operation extends React.Component {
 
       this.state = {
         amount: '',
-        accountId: null
+        accountId: null,
+        addCategory: ''
       }
   }
 
@@ -90,7 +91,7 @@ export default class Operation extends React.Component {
 
 
     render() {
-      const {amount, accountId, commentValue, transactions} = this.state;
+      const {amount, accountId, commentValue, transactions, addCategory} = this.state;
         return (
 
             <div className="app-headers list-group-item">
@@ -108,12 +109,14 @@ export default class Operation extends React.Component {
                 </div>
 
                 <HistoryTransactions
-                amount={amount}
-                accountId={accountId}
-                commentValue={commentValue}
-                transactions={transactions}
+                  amount={amount}
+                  accountId={accountId}
+                  commentValue={commentValue}
+                  transactions={transactions}
                   />
-                <CategoryAccounts />
+                <CategoryAccounts
+                  addCategory={addCategory}
+                />
 
 
             </div>

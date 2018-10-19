@@ -1,6 +1,6 @@
 import React, {Fragment} from 'react';
 
-import AccountsNum from './AccountsNum';
+import AccountsNum from '../AccountsNum';
 import './Accounts.css';
 
 export default class Accounts extends React.Component {
