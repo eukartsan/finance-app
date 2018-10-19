@@ -89,18 +89,22 @@ export default class Accounts extends React.Component {
 
         return (
             <Fragment>
-                <div>
-                    <form onSubmit={this.addAccountName}>
-                        <label>
-                            Account name:
-                            <input name="newAccountName" type="text" value={accountName} onChange={this.handleChange}/>
-                        </label>
-                        <input type="submit" value="Submit"/>
-                    </form>
+              <div className="app-header">
+              <h1>Income and expense accounting application</h1>
+              <h3>Balance</h3>
+                  <div>
+                      <form onSubmit={this.addAccountName}>
+                          <label>
+                              Account name:
+                              <input name="newAccountName" type="text" value={accountName} onChange={this.handleChange}/>
+                          </label>
+                          <input type="submit" value="Submit"/>
+                      </form>
+                  </div>
+                  <ul className="list-group-item">
+                      {account}
+                  </ul>
                 </div>
-                <ul className="list-group ">
-                    {account}
-                </ul>
             </Fragment>
         );
     };

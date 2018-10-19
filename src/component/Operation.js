@@ -1,6 +1,7 @@
 import React from 'react';
 import HistoryTransactions from './HistoryTransactions';
 import CategoryAccounts from './CategoryAccounts';
+import './Operation.css';
 
 export default class Operation extends React.Component {
   constructor() {
@@ -91,7 +92,9 @@ export default class Operation extends React.Component {
     render() {
       const {amount, accountId, commentValue, transactions} = this.state;
         return (
-            <div>
+
+            <div className="app-headers list-group-item">
+                <h3>Account transactions: </h3>
                 {this.accountsList()}
                 <input placeholder="Amount" value={amount} onChange={this.changeAmount}/>
                 <div className="btn">
@@ -100,7 +103,7 @@ export default class Operation extends React.Component {
                 <div className="btn">
                     <button onClick={this.addExpense} disabled={amount === '' || accountId === null}>Expense (-)</button>
                 </div>
-                <div className="float-right">
+                <div>
                   <textarea placeholder="Comment" value={commentValue} onChange={this.addComment}></textarea>
                 </div>
 

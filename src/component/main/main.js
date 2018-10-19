@@ -1,7 +1,6 @@
 import React from 'react';
 import Operation from '../Operation';
 import Accounts from '../Accounts';
-import './main.css';
 import uuidv4 from 'uuid/v4';
 
 export default class App extends React.Component {
@@ -96,9 +95,7 @@ export default class App extends React.Component {
         const {accounts, transactions, categoriesInCome, categoriesExpense} = this.state;
 
         return (
-            <div className="app-header">
-                <h1>Income and expense accounting application</h1>
-                <h3>Balance</h3>
+            <div>
                 <Accounts
                     accountsList={accounts}
                     addAccount={this.addAccount}
@@ -106,11 +103,9 @@ export default class App extends React.Component {
                     editAccountName={this.editAccount}
                     setAccountActive={this.setAccountActive}
                 />
-                <h3>Account transactions: </h3>
                 <Operation accountsList={accounts}
-                onSelectAccount={this.selectAccount}
-                transactions={transactions}
-
+                    onSelectAccount={this.selectAccount}
+                    transactions={transactions}
                 />
             </div>
         );

@@ -1,3 +1,9 @@
 .account-list{
   padding: 15px 150px;
 }
+
+.app-header {
+  display: flex;
+    align-items: center;
+    flex-direction: column;
+}
