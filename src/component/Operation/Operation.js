@@ -4,55 +4,56 @@ import CategoryAccounts from '../CategoryAccounts/CategoryAccounts';
 import './Operation.css';
 
 export default class Operation extends React.Component {
-  constructor() {
-      super()
+    constructor() {
+        super()
 
-      this.state = {
-        amount: '',
-        accountId: null,
-        addCategory: ''
-      }
-  }
+        this.state = {
+            amount: '',
+            accountId: null,
+            categoryName: '',
+            commentValue: ''
+        }
+    }
 
-  componentDidMount() {
-      this.selectElem.value = null
-  }
+    componentDidMount() {
+        this.selectElem.value = null
+    }
 
-  addIncome = () => {
-    const dateTime = Date(Date.now());
-    const {amount, accountId, commentValue} = this.state;
-    this.props.onSelectAccount(amount, accountId, dateTime, commentValue);
-    this.selectElem.value = null
-    this.setState({
-      amount: '',
-      accountId: null,
-      commentValue: ''
-    })
-   console.log(amount, accountId, dateTime, commentValue, 'amount, accountId, dateTime, commentValue')
-  }
+    addIncome = () => {
+        const dateTime = Date(Date.now());
+        const {amount, accountId, commentValue} = this.state;
+        this.props.onSelectAccount(amount, accountId, dateTime, commentValue);
+        this.selectElem.value = null
+        this.setState({
+            amount: '',
+            accountId: null,
+            commentValue: ''
+        })
+        console.log(amount, accountId, dateTime, commentValue, 'amount, accountId, dateTime, commentValue')
+    }
 
-  amountOnRegular = () => {
-    const {amount} = this.state;
-    const reg = /[.^0-9.,]/g;
-    const found = amount.match(reg);
-    console.log(found, 'found')
-  }
+    amountOnRegular = () => {
+        const {amount} = this.state;
+        const reg = /[.^0-9.,]/g;
+        const found = amount.match(reg);
+        console.log(found, 'found')
+    }
 
-  addExpense = () => {
-    const dateTime = Date(Date.now());
-    const {amount, accountId, commentValue} = this.state;
-    this.props.onSelectAccount(amount, accountId, dateTime, commentValue);
-    this.selectElem.value = null
-    this.setState({
-      amount: '',
-      accountId: null
-    })
-  }
+    addExpense = () => {
+        const dateTime = Date(Date.now());
+        const {amount, accountId, commentValue} = this.state;
+        this.props.onSelectAccount(amount, accountId, dateTime, commentValue);
+        this.selectElem.value = null
+        this.setState({
+            amount: '',
+            accountId: null
+        })
+    }
 
-    selectAccount = (event) => {
-      this.setState({
-        accountId: event.target.options[event.target.selectedIndex].dataset.id
-      })
+    setAccountValue = (event) => {
+        this.setState({
+            accountId: event.target.options[event.target.selectedIndex].dataset.id
+        })
     }
 
     accountsList() {
@@ -60,7 +61,7 @@ export default class Operation extends React.Component {
         const accountsName = accountsList.map((account) => {
             const {accountName, id} = account;
             return (
-                <option key={id} data-id={id} >
+                <option key={id} data-id={id}>
                     {accountName}
                 </option>
             )
@@ -68,8 +69,9 @@ export default class Operation extends React.Component {
 
         return (
             <select
-            onChange={this.selectAccount}
-            ref={elem => this.selectElem = elem}
+                className="select-item"
+                onChange={this.setAccountValue}
+                ref={elem => this.selectElem = elem}
             >
                 {accountsName}
             </select>
@@ -77,50 +79,80 @@ export default class Operation extends React.Component {
     }
 
     changeAmount = (event) => {
-      this.setState({
-        amount: event.target.value
-      })
+        this.setState({
+            amount: event.target.value
+        })
     }
 
     addComment = (event) => {
         this.setState({
-          commentValue: event.target.value
+            commentValue: event.target.value
         })
     }
 
-
+    setCategoryValue = (event) => {
+        this.setState({
+            label: event.target.value
+        })
+    }
 
     render() {
-      const {amount, accountId, commentValue, transactions, addCategory} = this.state;
+        const {categories} = this.props;
+
+        const {amount, accountId, commentValue, categoryName} = this.state;
         return (
 
-            <div className="app-headers list-group-item">
+            <div className="operation-list list-group-item">
                 <h3>Account transactions: </h3>
-                {this.accountsList()}
-                <input placeholder="Amount" value={amount} onChange={this.changeAmount}/>
-                <div className="btn">
-                    <button onClick={this.addIncome} disabled={amount === '' || accountId === null}>Income (+)</button>
+                <div className="transaction-amount mb-8">
+                    <label className="label">Select Score:</label>
+                    <div className="operation-item accountsList">
+                        {this.accountsList()}
+                    </div>
                 </div>
-                <div className="btn">
-                    <button onClick={this.addExpense} disabled={amount === '' || accountId === null}>Expense (-)</button>
+                <div className="transaction-checkbox mb-8">
+                    <input type="checkbox"
+                           id="inCome"
+                           name="transaction"
+                           value="inCome"
+
+                    />
+                    <label for="inCome" className="label label-checkbox"> Is income?</label>
+                </div>
+                <div className="transaction-amount mb-8">
+                    <label>Select Category:</label>
+                    <CategoryAccounts
+                        categories={categories}
+                        categoryName={categoryName}
+                        setCategoryValue={this.setCategoryValue}
+                    />
+                </div>
+                <div className="transaction-amount mb-8">
+                    <label>Enter Amount:</label>
+                    <input
+                        className="amount-label"
+                        placeholder="Amount"
+                        value={amount}
+                        onChange={this.changeAmount}/>
                 </div>
                 <div>
-                  <textarea placeholder="Comment" value={commentValue} onChange={this.addComment}></textarea>
+                        <textarea
+                            className="comment-value"
+                            placeholder="Comment"
+                            rows="3"
+                            value={commentValue}
+                            onChange={this.addComment}></textarea>
+                </div>
+                <div className="transaction-buttons">
+                    <div>
+                        <button onClick={this.addIncome}>Save</button>
+                    </div>
+                    <div>
+                        <button>Cancel</button>
+                    </div>
                 </div>
 
-                <HistoryTransactions
-                  amount={amount}
-                  accountId={accountId}
-                  commentValue={commentValue}
-                  transactions={transactions}
-                  />
-                <CategoryAccounts
-                  addCategory={addCategory}
-                />
-
-
             </div>
-
         )
-    };
-};
+    }
+}

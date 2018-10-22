@@ -2,6 +2,7 @@ import React from 'react';
 import Operation from '../Operation/Operation';
 import Accounts from '../Accounts/Accounts';
 import uuidv4 from 'uuid/v4';
+import HistoryTransactions from "../HistoryTransactions/HistoryTransactions";
 
 export default class App extends React.Component {
     constructor() {
@@ -9,13 +10,13 @@ export default class App extends React.Component {
 
         this.state = {
             accounts: [
-                {accountName: 'Score 1', total: '0', id: uuidv4(), active: false},
+                {accountName: 'Score 1', total: '0', id: 'f19947e9-0638-4080-9706-900c8fd01c9d', active: false},
                 {accountName: 'Score 2', total: '20', id: uuidv4(), active: false},
                 {accountName: 'Score 3', total: '100', id: uuidv4(), active: false},
             ],
             transactions: [
                 {
-                    datetime: '20.12.32',
+                    datetime: '20-12-83',
                     amount: 100.12,
                     account_id: 'f19947e9-0638-4080-9706-900c8fd01c9d',
                     isIncome: false,
@@ -23,10 +24,10 @@ export default class App extends React.Component {
                 },
             ],
             categories: [
-               {label: 'CatInCome1',  id: 1},
-               {label: 'CatInCome2',  id: 2},
-               {label: 'CatInCome3',  id: 3}
-           ],
+                {label: 'CatInCome1', id: 1, income: 'true'},
+                {label: 'CatInCome2', id: 2, income: 'true'},
+                {label: 'CatInCome3', id: 3, income: 'false'}
+            ],
 
         }
     }
@@ -76,23 +77,23 @@ export default class App extends React.Component {
     }
 
     selectAccount = (amount, accountId, dateTime, commentValue) => {
-      this.setState((prevState) => {
-        const transactionsIncome = {
-          account_id: accountId,
-          amount,
-          isIncome: true,
-          datetime: dateTime,
-          comment: commentValue
-        }
+        this.setState((prevState) => {
+            const transactionsIncome = {
+                account_id: accountId,
+                amount,
+                isIncome: true,
+                datetime: dateTime,
+                comment: commentValue
+            }
 
-        return {
-          transactions: [...prevState.transactions, transactionsIncome]
-        };
-      })
+            return {
+                transactions: [...prevState.transactions, transactionsIncome]
+            };
+        })
     }
 
     render() {
-        const {accounts, transactions, categoriesInCome, categoriesExpense, categories} = this.state;
+        const {accounts, transactions, categories} = this.state;
 
         return (
             <div>
@@ -103,10 +104,15 @@ export default class App extends React.Component {
                     editAccountName={this.editAccount}
                     setAccountActive={this.setAccountActive}
                 />
-                <Operation accountsList={accounts}
+                <Operation
+                    accountsList={accounts}
                     onSelectAccount={this.selectAccount}
                     transactions={transactions}
                     categories={categories}
+                />
+                <HistoryTransactions
+                    transactions={transactions}
+                    accountsList={accounts}
                 />
             </div>
         );
