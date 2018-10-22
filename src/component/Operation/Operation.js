@@ -15,7 +15,7 @@ export default class Operation extends React.Component {
             isChecked: false,
             isToggleOpen: true
         }
-    //    this.handleClick = this.handleClick.bind(this);
+        this.incomeChange = this.incomeChange.bind(this);
         this.transactionMenuOpen = this.transactionMenuOpen.bind(this);
 
     }

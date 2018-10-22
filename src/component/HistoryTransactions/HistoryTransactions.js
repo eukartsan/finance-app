@@ -2,12 +2,32 @@ import React from 'react';
 import './HistoryTransactions.css';
 
 export default class HistoryTransactions extends React.Component {
+  constructor() {
+      super()
+
+        this.state = {
+          menuOpen: ''
+        }
+
+        this.HistoryMenuOpen = this.HistoryMenuOpen.bind(this);
+      }
+
+      HistoryMenuOpen() {
+        this.setState(prevState => ({
+          menuOpen: !prevState.menuOpen
+        }));
+      }
+
     render() {
         const {transactions, accountsList} = this.props;
+
+
 
         const transactionList = transactions.map((transaction) => {
                 const {amount, account_id, comment: commentValue, datetime, isIncome} = transaction;
                 const newAccount = accountsList.find(el => el.id === account_id);
+
+
 
                 return (
                     <div className="transanctions-container">
@@ -34,6 +54,9 @@ export default class HistoryTransactions extends React.Component {
         return (
             <div>
                 <h2>History Transaction:</h2>
+                <button onClick={this.HistoryMenuOpen}>
+                  {this.state.HistoryMenuOpen ? 'Open' : 'Close'}
+                </button>
                 {transactionList}
             </div>
         )
