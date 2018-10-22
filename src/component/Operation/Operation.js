@@ -12,10 +12,11 @@ export default class Operation extends React.Component {
             accountId: null,
             categoryName: '',
             commentValue: '',
-            isChecked: false
+            isChecked: false,
+            isToggleOpen: true
         }
-
-        this.inComeChange = this.inComeChange.bind(this);
+    //    this.handleClick = this.handleClick.bind(this);
+        this.transactionMenuOpen = this.transactionMenuOpen.bind(this);
 
     }
 
@@ -100,16 +101,20 @@ export default class Operation extends React.Component {
         })
     }
 
-    inComeChange () {
+    incomeChange () {
       this.setState({isChecked: !this.state.isChecked});
 
+    }
+
+    transactionMenuOpen() {
+      this.setState(prevState => ({
+        isToggleOpen: !prevState.isToggleOpen
+      }));
     }
 
     render() {
         const {categories} = this.props;
         const {amount, accountId, commentValue, categoryName} = this.state;
-
-
 
         var incometxt;
           if (this.state.isChecked) {
@@ -122,6 +127,9 @@ export default class Operation extends React.Component {
 
             <div className="operation-list list-group-item">
                 <h3>Account transactions: </h3>
+                <button onClick={this.transactionMenuOpen}>
+                  {this.state.isToggleOpen ? 'Open' : 'Close'}
+                </button>
                 <div className="transaction-amount mb-8">
                     <label className="label">Select Score:</label>
                     <div className="operation-item accountsList">
@@ -130,19 +138,18 @@ export default class Operation extends React.Component {
                 </div>
                 <div className="transaction-checkbox mb-8">
                     <input type="checkbox"
-                           id="inCome"
+                           id="income"
                            name="transaction"
-                           value="inCome"
-                           onChange={this.inComeChange}
+                           value="income"
+                           onChange={this.incomeChange}
                     />
-                    <label for="inCome" className="label label-checkbox"> Is income?</label>
+                    <label htmlFor="income" className="label label-checkbox"> Is income?</label>
                     <p>{incometxt}</p>
                 </div>
                 <div className="transaction-amount mb-8">
                     <label>Select Category:</label>
                     <CategoryAccounts
                         categories={categories}
-                        categoryName={categoryName}
                         setCategoryValue={this.setCategoryValue}
                     />
                 </div>

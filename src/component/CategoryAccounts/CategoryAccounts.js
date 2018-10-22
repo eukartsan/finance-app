@@ -9,6 +9,7 @@ export default class CategoryAccounts extends React.Component {
 
             return (
                 <option>{label}, {income}</option>
+          //   <option>`${label}, ${income}`</option>
             )
         })
 
