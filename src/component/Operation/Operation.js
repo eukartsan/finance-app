@@ -11,8 +11,12 @@ export default class Operation extends React.Component {
             amount: '',
             accountId: null,
             categoryName: '',
-            commentValue: ''
+            commentValue: '',
+            isChecked: false
         }
+
+        this.inComeChange = this.inComeChange.bind(this);
+
     }
 
     componentDidMount() {
@@ -96,10 +100,24 @@ export default class Operation extends React.Component {
         })
     }
 
+    inComeChange () {
+      this.setState({isChecked: !this.state.isChecked});
+
+    }
+
     render() {
         const {categories} = this.props;
-
         const {amount, accountId, commentValue, categoryName} = this.state;
+
+
+
+        var incometxt;
+          if (this.state.isChecked) {
+            incometxt = 'checked'
+          } else {
+            incometxt = 'unchecked'
+          }
+
         return (
 
             <div className="operation-list list-group-item">
@@ -115,9 +133,10 @@ export default class Operation extends React.Component {
                            id="inCome"
                            name="transaction"
                            value="inCome"
-
+                           onChange={this.inComeChange}
                     />
                     <label for="inCome" className="label label-checkbox"> Is income?</label>
+                    <p>{incometxt}</p>
                 </div>
                 <div className="transaction-amount mb-8">
                     <label>Select Category:</label>
