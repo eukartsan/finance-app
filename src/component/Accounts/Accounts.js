@@ -82,7 +82,6 @@ export default class Accounts extends React.Component {
                         <button className="d-flex float-right" onClick={this.deleteAccount(id)}>Delete</button>
                     </span>
                     }
-
                 </li>
             );
         });
@@ -95,7 +94,7 @@ export default class Accounts extends React.Component {
                   <div>
                       <form onSubmit={this.addAccountName}>
                           <label>
-                              Account name:
+                              <span>Account name: </span>
                               <input name="newAccountName" type="text" value={accountName} onChange={this.handleChange}/>
                           </label>
                           <input type="submit" value="Submit"/>

@@ -6,13 +6,11 @@ export default class HistoryTransactions extends React.Component {
       super()
 
         this.state = {
-          menuOpen: ''
+          menuOpen: false
         }
-
-        this.HistoryMenuOpen = this.HistoryMenuOpen.bind(this);
       }
 
-      HistoryMenuOpen() {
+      HistoryMenuOpen = () => {
         this.setState(prevState => ({
           menuOpen: !prevState.menuOpen
         }));
@@ -21,13 +19,9 @@ export default class HistoryTransactions extends React.Component {
     render() {
         const {transactions, accountsList} = this.props;
 
-
-
-        const transactionList = transactions.map((transaction) => {
+        const transactionList = this.state.menuOpen && transactions.map((transaction) => {
                 const {amount, account_id, comment: commentValue, datetime, isIncome} = transaction;
                 const newAccount = accountsList.find(el => el.id === account_id);
-
-
 
                 return (
                     <div className="transanctions-container">
@@ -55,7 +49,7 @@ export default class HistoryTransactions extends React.Component {
             <div>
                 <h2>History Transaction:</h2>
                 <button onClick={this.HistoryMenuOpen}>
-                  {this.state.HistoryMenuOpen ? 'Open' : 'Close'}
+                  {this.state.menuOpen ? 'Open' : 'Close'}
                 </button>
                 {transactionList}
             </div>
