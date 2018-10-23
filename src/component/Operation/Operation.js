@@ -109,10 +109,9 @@ export default class Operation extends React.Component {
 
     render() {
         const {categories} = this.props;
-        const {amount, accountId, commentValue, categoryName} = this.state;
+        const {amount, accountId, commentValue, categoryName, isToggleOpen} = this.state;
 
-        const accountMenu = this.state.isToggleOpen &&
-        <div>
+        const accountMenu = isToggleOpen && <div>
         <div className="transaction-amount mb-8">
             <label className="label">Select Score:</label>
             <div className="operation-item accountsList">
@@ -127,7 +126,7 @@ export default class Operation extends React.Component {
                    onChange={this.incomeChange}
             />
             <label htmlFor="income" className="label label-checkbox"> Is income?</label>
-            <p>{incometxt}</p>
+            <div>{this.state.isChecked ? 'checked' : 'unchecked'}</div>
         </div>
         <div className="transaction-amount mb-8">
             <label>Select Category:</label>
@@ -161,20 +160,12 @@ export default class Operation extends React.Component {
             </div>
         </div>
         </div>
-
-        var incometxt;
-          if (this.state.isChecked) {
-            incometxt = 'checked'
-          } else {
-            incometxt = 'unchecked'
-          }
-
         return (
 
             <div className="operation-list list-group-item">
                 <h3>Account transactions: </h3>
                 <button onClick={this.transactionMenuOpen}>
-                  {this.state.isToggleOpen ? 'Open' : 'Close'}
+                  {this.state.isToggleOpen ? 'Close' : 'Open'}
                 </button>
                 {accountMenu}
             </div>
