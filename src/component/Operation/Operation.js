@@ -12,18 +12,15 @@ export default class Operation extends React.Component {
             accountId: null,
             categoryName: '',
             commentValue: '',
-            isChecked: false
+            isIncomeChecked: false,
+            isToggleOpen: true
         }
     }
 
-    /*componentDidMount() {
-        this.selectElem.value = null
-    }*/
-
     addIncome = () => {
         const dateTime = Date(Date.now());
-        const {amount, accountId, commentValue} = this.state;
-        this.props.onSelectAccount(amount, accountId, dateTime, commentValue);
+        const {amount, accountId, commentValue, isIncomeChecked} = this.state;
+        this.props.onSelectAccount(amount, accountId, dateTime, commentValue, isIncomeChecked);
         this.selectElem.value = null
         this.setState({
             amount: '',
@@ -98,7 +95,7 @@ export default class Operation extends React.Component {
     }
 
     incomeChange = () => {
-      this.setState({isChecked: !this.state.isChecked});
+      this.setState({isIncomeChecked: !this.state.isIncomeChecked});
     }
 
     transactionMenuOpen = () => {
@@ -109,7 +106,7 @@ export default class Operation extends React.Component {
 
     render() {
         const {categories} = this.props;
-        const {amount, accountId, commentValue, categoryName, isToggleOpen} = this.state;
+        const {amount, accountId, commentValue, categoryName, isToggleOpen, isIncomeChecked} = this.state;
 
         const accountMenu = isToggleOpen && <div>
         <div className="transaction-amount mb-8">
@@ -126,13 +123,14 @@ export default class Operation extends React.Component {
                    onChange={this.incomeChange}
             />
             <label htmlFor="income" className="label label-checkbox"> Is income?</label>
-            <div>{this.state.isChecked ? 'checked' : 'unchecked'}</div>
+           {/* <div>{isChecked ? 'checked' : 'unchecked'}</div>*/}
         </div>
         <div className="transaction-amount mb-8">
             <label>Select Category:</label>
             <CategoryAccounts
                 categories={categories}
                 setCategoryValue={this.setCategoryValue}
+                isIncomeChecked={isIncomeChecked}
             />
         </div>
         <div className="transaction-amount mb-8">
@@ -153,10 +151,10 @@ export default class Operation extends React.Component {
         </div>
         <div className="transaction-buttons">
             <div>
-                <button onClick={this.addIncome}>Save</button>
+                <button onClick={this.addIncome} disabled={amount === '' || accountId === null}>Save</button>
             </div>
             <div>
-                <button>Cancel</button>
+                <button onClick={this.transactionMenuOpen}>Cancel</button>
             </div>
         </div>
         </div>
@@ -165,7 +163,7 @@ export default class Operation extends React.Component {
             <div className="operation-list list-group-item">
                 <h3>Account transactions: </h3>
                 <button onClick={this.transactionMenuOpen}>
-                  {this.state.isToggleOpen ? 'Close' : 'Open'}
+                  {isToggleOpen ? 'Close' : 'Open'}
                 </button>
                 {accountMenu}
             </div>

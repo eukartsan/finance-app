@@ -3,15 +3,17 @@ import './CategoryAccounts.css';
 
 export default class CategoryAccounts extends React.Component {
     render() {
-        const {categories} = this.props;
-        const categoriesList = categories.map((item) => {
-            const {label, income} = item;
+        const {categories, isIncomeChecked} = this.props;
+        const categoriesList = categories
+            .filter((item) => item.income === isIncomeChecked)
+            .map((item) => {
+                const {label} = item;
 
-            return (
-                <option>{label}, {income}</option>
-          //   <option>`${label}, ${income}`</option>
-            )
-        })
+                return (
+                    <option>{label}</option>
+                    //  {/*<option>{`${label}, ${income}`}</option>*/}
+                )
+            })
 
         return (
             <div>

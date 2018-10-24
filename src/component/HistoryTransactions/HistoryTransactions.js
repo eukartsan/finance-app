@@ -6,7 +6,7 @@ export default class HistoryTransactions extends React.Component {
       super()
 
         this.state = {
-          menuOpen: false
+          menuOpen: true
         }
       }
 
@@ -20,36 +20,15 @@ export default class HistoryTransactions extends React.Component {
         const {transactions, accountsList} = this.props;
         const {menuOpen} = this.state;
 
-        const transactionHeader = (transactions.map((transaction) => {
-          return (
-            <div className="transanctions-container">
-                <div className="transaction-item">
-                    <p>Score Name:</p>
-                </div>
-                <div className="transaction-item">
-                    <p>Amount:</p>
-                </div>
-                <div className="transaction-item">
-                    <p>Commentaty:</p>
-                </div>
-                <div className="transaction-item">
-                  <p>Date Time:</p>
-                </div>
-                <div className="transaction-item">
-                    <p>Income or Expence:</p>
-                </div>
-            </div>
-          )
-        }
-
         const transactionList = menuOpen && transactions.map((transaction) => {
                 const {amount, account_id, comment: commentValue, datetime, isIncome} = transaction;
                 const newAccount = accountsList.find(el => el.id === account_id);
+                //console.log(newAccount.accountName, 'newAccount.accountName')
 
                 return (
-                    <div className="transanctions-container">
+                    <div className="transactions-container">
                         <div className="transaction-item">
-                            {newAccount.accountName}
+                            {newAccount && newAccount.accountName || 'Deleted account'}
                         </div>
                         <div className="transaction-item">
                             {amount}
@@ -72,9 +51,9 @@ export default class HistoryTransactions extends React.Component {
             <div>
                 <h2>History Transaction:</h2>
                 <button onClick={this.historyMenuOpen}>
-                  {this.state.menuOpen ? 'Close' : 'Open'}
+                  {menuOpen ? 'Close' : 'Open'}
                 </button>
-                {transactionHeader}
+                {/*{transactionHeader}*/}
                 {transactionList}
             </div>
         )

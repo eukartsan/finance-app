@@ -10,23 +10,25 @@ export default class App extends React.Component {
 
         this.state = {
             accounts: [
-                {accountName: 'Score 1', total: '0', id: 'f19947e9-0638-4080-9706-900c8fd01c9d', active: false},
-                {accountName: 'Score 2', total: '20', id: uuidv4(), active: false},
-                {accountName: 'Score 3', total: '100', id: uuidv4(), active: false},
+                {id: 'f19947e9-0638-4080-9706-900c8fd01c9d', accountName: 'Score 1', total: '0', active: false, isArchived: false},
+                {id: uuidv4(), accountName: 'Score 2', total: '20', active: false, isArchived: false},
+                {id: uuidv4(), accountName: 'Score 3', total: '100', active: false, isArchived: false},
             ],
             transactions: [
                 {
+                    account_id: 'f19947e9-0638-4080-9706-900c8fd01c9d',
                     datetime: '20-12-83',
                     amount: 100.12,
-                    account_id: 'f19947e9-0638-4080-9706-900c8fd01c9d',
                     isIncome: false,
                     comment: 'my first income'
                 },
             ],
             categories: [
-                {label: 'CatInCome1', id: 1, income: 'true'},
-                {label: 'CatInCome2', id: 2, income: 'true'},
-                {label: 'CatInCome3', id: 3, income: 'false'}
+                {id: 1, label: ' ', income: true},
+                {id: 2, label: ' ', income: false},
+                {id: 3, label: 'CatInCome1', income: true},
+                {id: 4, label: 'CatInCome2', income: true},
+                {id: 5, label: 'CatInCome3', income: false}
             ],
 
         }
@@ -39,6 +41,7 @@ export default class App extends React.Component {
                 total: '0',
                 id: uuidv4(),
                 active: false,
+                isArchived: false
             }
 
             return {
@@ -76,12 +79,12 @@ export default class App extends React.Component {
         })
     }
 
-    selectAccount = (amount, accountId, dateTime, commentValue) => {
+    selectAccount = (amount, accountId, dateTime, commentValue, isIncome) => {
         this.setState((prevState) => {
             const transactionsIncome = {
                 account_id: accountId,
                 amount,
-                isIncome: true,
+                isIncome,
                 datetime: dateTime,
                 comment: commentValue
             }
