@@ -20,10 +20,13 @@ export default class HistoryTransactions extends React.Component {
         const {transactions, accountsList, transactionMenu} = this.props;
         const {menuOpen} = this.state;
 
-        const transactionMenu = transactionMenu.map((transaction) => {
+        const transactionHeaderMenu = transactionMenu.map((transactionMenu) => {
           return (
 
               <div className="transactions-container">
+                  <div className="transaction-item">
+                      {transactionMenu.score}
+                  </div>
                   <div className="transaction-item">
                       {transactionMenu.amount}
                   </div>
@@ -34,14 +37,11 @@ export default class HistoryTransactions extends React.Component {
                       {transactionMenu.datetime}
                   </div>
                   <div className="transaction-item">
-                      {transactionMenu.category}
-                  </div>
-                  <div className="transaction-item">
                       {transactionMenu.income}
                   </div>
               </div>
           )
-      }
+      })
 
         const transactionList = menuOpen && transactions.map((transaction) => {
                 const {amount, account_id, comment: commentValue, datetime, isIncome} = transaction;
@@ -49,9 +49,6 @@ export default class HistoryTransactions extends React.Component {
                 //console.log(newAccount.accountName, 'newAccount.accountName')
 
                 return (
-
-
-
                     <div className="transactions-container">
                         <div className="transaction-item">
                             {newAccount && newAccount.accountName || 'Deleted account'}
@@ -79,7 +76,7 @@ export default class HistoryTransactions extends React.Component {
                 <button onClick={this.historyMenuOpen}>
                   {menuOpen ? 'Close' : 'Open'}
                 </button>
-                {transactionMenu}
+                {transactionHeaderMenu}
                 {transactionList}
             </div>
         )

@@ -25,6 +25,7 @@ export default class App extends React.Component {
             ],
             transactionMenu: [
               {
+                score: 'Score',
                 amount: 'Amount',
                 comment: 'Comment',
                 datetime: 'DateTime',
@@ -105,7 +106,7 @@ export default class App extends React.Component {
     }
 
     render() {
-        const {accounts, transactions, categories} = this.state;
+        const {accounts, transactions, categories, transactionMenu} = this.state;
 
         return (
             <div>

@@ -8,7 +8,8 @@ export default class Accounts extends React.Component {
         super()
 
         this.state = {
-            accountName: ''
+            accountName: '',
+            isArchived: 'false'
         };
     }
 
@@ -29,9 +30,16 @@ export default class Accounts extends React.Component {
     }
 
     deleteAccount = (id) => (event) => {
+
         event.preventDefault();
-        const {onDeleted} = this.props
-        onDeleted(id);
+        const {onDeleted} = this.props,
+        {isArchived} = this.state
+        //onDeleted(id);
+
+        this.setState(prevState => ({
+          isArchived: !prevState.isArchived
+        }));
+
     }
 
     editAccountName = (id) => (event) => {
@@ -49,7 +57,9 @@ export default class Accounts extends React.Component {
         const {accountsList} = this.props,
             {accountName} = this.state
 
-        const account = accountsList.map((item) => {
+        const account = accountsList
+            .filter((item) => item.isArchived === false)
+            .map((item) => {
             const {id, accountName: accountItemName, total, active} = item;
 
             return (
