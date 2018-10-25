@@ -127,6 +127,7 @@ export default class App extends React.Component {
                     transactions={transactions}
                     accountsList={accounts}
                     transactionMenu={transactionMenu}
+                    categories={categories}
                 />
             </div>
         );

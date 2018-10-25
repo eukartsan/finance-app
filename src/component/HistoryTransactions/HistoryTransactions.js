@@ -17,13 +17,23 @@ export default class HistoryTransactions extends React.Component {
       }
 
     render() {
-        const {transactions, accountsList, transactionMenu} = this.props;
+        const {transactions, accountsList, transactionMenu, categories} = this.props;
         const {menuOpen} = this.state;
+
+        const {isIncomeChecked} = this.props;
+        const categoriesInArchiv = categories
+            .filter((item) => item.isArchived === true)
+            .map((item) => {
+                const {isArchived} = item;
+
+            })
+
 
         const transactionHeaderMenu = transactionMenu.map((transactionMenu) => {
           return (
 
               <div className="transactions-container">
+                  <div className="transaction-block-item">
                   <div className="transaction-item">
                       {transactionMenu.score}
                   </div>
@@ -39,6 +49,7 @@ export default class HistoryTransactions extends React.Component {
                   <div className="transaction-item">
                       {transactionMenu.income}
                   </div>
+                  </div>
               </div>
           )
       })
@@ -50,6 +61,8 @@ export default class HistoryTransactions extends React.Component {
 
                 return (
                     <div className="transactions-container">
+                    {transactionHeaderMenu}
+                      <div className="transaction-block-item">
                         <div className="transaction-item">
                             {newAccount && newAccount.accountName || 'Deleted account'}
                         </div>
@@ -65,6 +78,7 @@ export default class HistoryTransactions extends React.Component {
                         <div className="transaction-item">
                             {isIncome ? 'Income' : 'Expence'}
                         </div>
+                        </div>
                     </div>
                 )
             }
@@ -76,7 +90,7 @@ export default class HistoryTransactions extends React.Component {
                 <button onClick={this.historyMenuOpen}>
                   {menuOpen ? 'Close' : 'Open'}
                 </button>
-                {transactionHeaderMenu}
+
                 {transactionList}
             </div>
         )
