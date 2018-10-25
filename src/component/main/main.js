@@ -23,6 +23,15 @@ export default class App extends React.Component {
                     comment: 'my first income'
                 },
             ],
+            transactionMenu: [
+              {
+                amount: 'Amount',
+                comment: 'Comment',
+                datetime: 'DateTime',
+                category: 'Category',
+                income: 'Income'
+              },
+            ],
             categories: [
                 {id: 1, label: ' ', income: true},
                 {id: 2, label: ' ', income: false},
@@ -116,6 +125,7 @@ export default class App extends React.Component {
                 <HistoryTransactions
                     transactions={transactions}
                     accountsList={accounts}
+                    transactionMenu={transactionMenu}
                 />
             </div>
         );
