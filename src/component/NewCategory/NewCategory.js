@@ -13,6 +13,19 @@ export default class NewCategory extends React.Component {
     this.setState({newIsIncomeChecked: !this.state.newIsIncomeChecked});
   }
 
+  addNewCategory = (amount, income) => {
+    this.setState((prevState) => {
+        const categoriesNew = {
+            amount,
+            income
+        }
+
+        return {
+            categories: [...prevState.categories, categoriesNew]
+        };
+    })
+  }
+
   render() {
     const {categories} = this.props;
 
@@ -32,7 +45,7 @@ export default class NewCategory extends React.Component {
             <label htmlFor="income" className="label label-checkbox"> Is income?</label>
             </div>
         </form>
-        <button >Save</button>
+        <button onChange={this.addNewCategory}>Save</button>
       </div>
     )
   }
