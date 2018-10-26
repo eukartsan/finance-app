@@ -9,7 +9,7 @@ export default class Accounts extends React.Component {
 
         this.state = {
             accountName: '',
-            isArchived: 'false'
+            isArchived: false
         };
     }
 

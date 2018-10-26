@@ -11,7 +11,6 @@ export default class CategoryAccounts extends React.Component {
 
                 return (
                     <option>{label}</option>
-                    //  {/*<option>{`${label}, ${income}`}</option>*/}
                 )
             })
 

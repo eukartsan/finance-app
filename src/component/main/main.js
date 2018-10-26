@@ -1,6 +1,7 @@
 import React from 'react';
 import Operation from '../Operation/Operation';
 import Accounts from '../Accounts/Accounts';
+import NewCategory from '../NewCategory/NewCategory';
 import uuidv4 from 'uuid/v4';
 import HistoryTransactions from "../HistoryTransactions/HistoryTransactions";
 
@@ -121,6 +122,9 @@ export default class App extends React.Component {
                     accountsList={accounts}
                     onSelectAccount={this.selectAccount}
                     transactions={transactions}
+                    categories={categories}
+                />
+                <NewCategory
                     categories={categories}
                 />
                 <HistoryTransactions
