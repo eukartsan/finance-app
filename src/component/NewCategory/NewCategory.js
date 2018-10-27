@@ -37,18 +37,18 @@ export default class NewCategory extends React.Component {
     const {categories} = this.props;
     const {menuOpen} = this.state;
 
-    const newCategoryMenu = menuOpen => {
+    const newCategoryMenu = (menuOpen) => {
       return (
         <div>
         <input placeholder="Category" />
-          <input type="checkbox"
-                 id="income"
-                 name="transaction"
-                 value="income"
-                 onChange={this.newIncomeChange}
-                 />
+        <input type="checkbox"
+               id="income"
+               name="transaction"
+               value="income"
+               onChange={this.newIncomeChange}
+               />
           <label htmlFor="income" className="label label-checkbox"> Is income?</label>
-                    <button onChange={this.addNewCategory}>Save</button>
+            <button onChange={this.addNewCategory}>Save</button>
           </div>
       )
     }

@@ -4,6 +4,7 @@ import Accounts from '../Accounts/Accounts';
 import NewCategory from '../NewCategory/NewCategory';
 import uuidv4 from 'uuid/v4';
 import HistoryTransactions from "../HistoryTransactions/HistoryTransactions";
+import Transfer from "../Transfer/Transfer";
 
 export default class App extends React.Component {
     constructor() {
@@ -123,6 +124,9 @@ export default class App extends React.Component {
                     onSelectAccount={this.selectAccount}
                     transactions={transactions}
                     categories={categories}
+                />
+                <Transfer
+                  categories={categories}
                 />
                 <NewCategory
                     categories={categories}
