@@ -12,9 +12,9 @@ export default class App extends React.Component {
 
         this.state = {
             accounts: [
-                {id: 'f19947e9-0638-4080-9706-900c8fd01c9d', accountName: 'Score 1', total: '0', active: false, isArchived: false},
-                {id: uuidv4(), accountName: 'Score 2', total: '20', active: false, isArchived: false},
-                {id: uuidv4(), accountName: 'Score 3', total: '100', active: false, isArchived: false},
+                {id: 'f19947e9-0638-4080-9706-900c8fd01c9d', accountName: 'Score 1', total: 0, active: false, isArchived: false},
+                {id: uuidv4(), accountName: 'Score 2', total: 20, active: false, isArchived: false},
+                {id: uuidv4(), accountName: 'Score 3', total: 100, active: false, isArchived: false},
             ],
             transactions: [
                 {
@@ -126,7 +126,7 @@ export default class App extends React.Component {
                     categories={categories}
                 />
                 <Transfer
-                  categories={categories}
+                  accountsList={accounts}
                 />
                 <NewCategory
                     categories={categories}

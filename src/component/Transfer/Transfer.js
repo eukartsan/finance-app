@@ -3,7 +3,22 @@ import React from 'react';
 export default class Transfer extends React.Component {
 
   render() {
-    const {categories} = this.props;
+    const {accountsList} = this.props;
+    const scoreFromAccount = accountsList.map((item) => {
+            const {accountName, total} = item;
+
+            return (
+                <option>{accountName}</option>
+            )
+        })
+
+    const scoreToAccount = accountsList.map((item) => {
+            const {accountName, total} = item;
+
+            return (
+                <option>{accountName}</option>
+            )
+        })
 
         return(
           <div className="operation-list list-group-item">
@@ -12,16 +27,14 @@ export default class Transfer extends React.Component {
               <div className="transaction-amount mb-8">
                 <label>From Score:</label>
                 <select>
-                  <option>Score 1</option>
-                  <option>Score 2</option>
+                  {scoreFromAccount}
                 </select>
                 <label>To Score:</label>
                 <select>
-                  <option>Score 1</option>
-                  <option>Score 2</option>
+                  {scoreToAccount}
                 </select>
                 <label>Amount:</label>
-                <input placeholder="Amount"/>
+                <input placeholder="Amount" value="value"/>
                 <div>
                   <button>Transfer</button>
                 </div>
