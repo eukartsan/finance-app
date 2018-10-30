@@ -1,6 +1,20 @@
 import React from 'react';
 
 export default class Transfer extends React.Component {
+  constructor() {
+      super()
+
+      this.state = {
+        menuTransfer: true
+      }
+
+      }
+
+  addTransfer = () => {
+    this.setState(prevState => ({
+      menuTransfer: !prevState.menuTransfer
+    }));
+  }
 
   render() {
     const {accountsList} = this.props;
@@ -34,9 +48,9 @@ export default class Transfer extends React.Component {
                   {scoreToAccount}
                 </select>
                 <label>Amount:</label>
-                <input placeholder="Amount" value="value"/>
+                <input placeholder="Amount"/>
                 <div>
-                  <button>Transfer</button>
+                  <button onChange={this.addTransfer}>Transfer</button>
                 </div>
               </div>
             </form>
