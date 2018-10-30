@@ -9,7 +9,7 @@ export default class HistoryTransactions extends React.Component {
           menuOpen: true
         }
       }
-
+      
       historyMenuOpen = () => {
           this.setState(({menuOpen}) => ({menuOpen: !menuOpen}));
       }

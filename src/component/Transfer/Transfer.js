@@ -15,7 +15,7 @@ export default class Transfer extends React.Component {
     }
 
   render() {
-    const {accountsList} = this.props;
+    const {accountsList, menuTransfer} = this.props;
     const scoreFromAccount = accountsList.map((item) => {
             const {accountName, total} = item;
 
@@ -35,23 +35,26 @@ export default class Transfer extends React.Component {
         return(
           <div className="operation-list list-group-item">
             <h3>Transfer to another account: </h3>
-            <form>
-              <div className="transaction-amount mb-8">
-                <label>From Score:</label>
-                <select>
-                  {scoreFromAccount}
-                </select>
-                <label>To Score:</label>
-                <select>
-                  {scoreToAccount}
-                </select>
-                <label>Amount:</label>
-                <input placeholder="Amount"/>
-                <div>
-                  <button onChange={this.addTransfer}>Transfer</button>
+            <button>{menuTransfer ? 'Close' : 'Open'}</button>
+            <div>
+              <form>
+                <div className="transaction-amount mb-8">
+                  <label>From Score:</label>
+                  <select>
+                    {scoreFromAccount}
+                  </select>
+                  <label>To Score:</label>
+                  <select>
+                    {scoreToAccount}
+                  </select>
+                  <label>Amount:</label>
+                  <input placeholder="Amount"/>
+                  <div>
+                    <button>Transfer</button>
+                  </div>
                 </div>
-              </div>
-            </form>
+              </form>
+            </div>
           </div>
         )
 

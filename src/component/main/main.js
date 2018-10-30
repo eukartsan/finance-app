@@ -126,7 +126,7 @@ export default class App extends React.Component {
                     categories={categories}
                 />
                 <Transfer
-                  accountsList={accounts}
+                    accountsList={accounts}
                 />
                 <NewCategory
                     categories={categories}

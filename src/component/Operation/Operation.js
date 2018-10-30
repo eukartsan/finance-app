@@ -98,12 +98,6 @@ export default class Operation extends React.Component {
       this.setState({isIncomeChecked: !this.state.isIncomeChecked});
     }
 
-    transactionMenuOpen = () => {
-      this.setState(prevState => ({
-        isToggleOpen: !prevState.isToggleOpen
-      }));
-    }
-
     render() {
         const {categories} = this.props;
         const {amount, accountId, commentValue, categoryName, isToggleOpen, isIncomeChecked} = this.state;
@@ -154,7 +148,7 @@ export default class Operation extends React.Component {
                 <button onClick={this.addIncome} disabled={amount === '' || accountId === null}>Save</button>
             </div>
             <div>
-                <button onClick={this.transactionMenuOpen}>Cancel</button>
+                <button>Cancel</button>
             </div>
         </div>
         </div>
