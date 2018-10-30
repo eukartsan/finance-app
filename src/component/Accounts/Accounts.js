@@ -42,7 +42,14 @@ export default class Accounts extends React.Component {
           isArchived: !prevState.isArchived
         }));
 
+        this.setState((prevState) => {
+            const accountObj = {
+                isArchived: true
+            }
 
+            return {
+                accounts: [...prevState.accounts, accountObj]
+            };
 
     }
 

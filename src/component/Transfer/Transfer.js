@@ -10,11 +10,9 @@ export default class Transfer extends React.Component {
 
       }
 
-  addTransfer = () => {
-    this.setState(prevState => ({
-      menuTransfer: !prevState.menuTransfer
-    }));
-  }
+    addTransfer = () => {
+        this.setState(({menuTransfer}) => ({menuTransfer: !menuTransfer}));
+    }
 
   render() {
     const {accountsList} = this.props;

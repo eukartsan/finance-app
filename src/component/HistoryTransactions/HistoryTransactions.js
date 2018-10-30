@@ -11,9 +11,7 @@ export default class HistoryTransactions extends React.Component {
       }
 
       historyMenuOpen = () => {
-        this.setState(prevState => ({
-          menuOpen: !prevState.menuOpen
-        }));
+          this.setState(({menuOpen}) => ({menuOpen: !menuOpen}));
       }
 
     render() {
