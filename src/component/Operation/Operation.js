@@ -37,10 +37,6 @@ export default class Operation extends React.Component {
         console.log(found, 'found')
     }
 
-
-
-
-
     addExpense = () => {
         const dateTime = Date(Date.now());
         const {amount, accountId, commentValue} = this.state;

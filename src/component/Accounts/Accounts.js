@@ -32,26 +32,22 @@ export default class Accounts extends React.Component {
     deleteAccount = (id) => (event) => {
 
         event.preventDefault();
-        const {onDeleted} = this.props,
+        const {onDeleted, accounts} = this.props,
 
          {isArchived} = this.state
         //onDeleted(id);
 
+        this.setState(prevState => (
+          {isArchived: !prevState.isArchived}
+          const accountArchive = {
+              isArchived: true
+          }
 
-        this.setState(prevState => ({
-          isArchived: !prevState.isArchived
-        }));
-
-        this.setState((prevState) => {
-            const accountObj = {
-                isArchived: true
-            }
-
-            return {
-                accounts: [...prevState.accounts, accountObj]
-            };
-
-    }
+          return {
+              accounts: [...prevState.accounts, accountArchive]
+          }
+        )
+      );
 
     editAccountName = (id) => (event) => {
         const {editAccountName} = this.props;
