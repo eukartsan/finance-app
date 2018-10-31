@@ -5,7 +5,8 @@ export default class Transfer extends React.Component {
       super()
 
       this.state = {
-        menuTransfer: false
+        menuTransfer: false,
+        transferValue: ''
       }
 
       }
@@ -14,9 +15,15 @@ export default class Transfer extends React.Component {
         this.setState(({menuTransfer}) => ({menuTransfer: !menuTransfer}));
     }
 
+    onTransfer = (event) => {
+        this.setState({
+            transferValue: event.target.value
+        });
+    }
+
   render() {
     const {accountsList} = this.props;
-    const {menuTransfer} = this.state;
+    const {menuTransfer, transferValue} = this.state;
     const scoreFromAccount = accountsList.map((item) => {
             const {accountName, total} = item;
 
@@ -45,7 +52,13 @@ export default class Transfer extends React.Component {
             {scoreToAccount}
           </select>
           <label>Amount:</label>
-          <input placeholder="Amount"/>
+          <input
+            placeholder="Amount"
+            name="TransferAmount"
+            type="text"
+            value={transferValue}
+            onChange={this.onTransfer}
+          />
           <div className="transaction-buttons">
             <button>Transfer</button>
           </div>

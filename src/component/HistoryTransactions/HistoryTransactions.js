@@ -6,7 +6,7 @@ export default class HistoryTransactions extends React.Component {
       super()
 
         this.state = {
-          menuOpen: true
+          menuOpen: false
         }
       }
 

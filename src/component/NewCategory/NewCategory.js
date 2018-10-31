@@ -6,7 +6,7 @@ export default class NewCategory extends React.Component {
 
         this.state = {
           newIsIncomeChecked: false,
-          menuCategoryOpen: true,
+          menuCategoryOpen: false,
           categoryName: ''
         }
       }
@@ -47,7 +47,7 @@ export default class NewCategory extends React.Component {
           <label>Enter new category:</label>
           <input
             placeholder="Category"
-            name="newAccountName"
+            name="newCategoryName"
             type="text"
             value={categoryName}
             onChange={this.handleChange}
