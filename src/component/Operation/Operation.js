@@ -1,5 +1,4 @@
 import React from 'react';
-import HistoryTransactions from '../HistoryTransactions/HistoryTransactions';
 import CategoryAccounts from '../CategoryAccounts/CategoryAccounts';
 import './Operation.css';
 
@@ -13,7 +12,7 @@ export default class Operation extends React.Component {
             categoryName: '',
             commentValue: '',
             isIncomeChecked: false,
-            isToggleOpen: true
+            isToggleOpen: false
         }
     }
 
@@ -98,9 +97,13 @@ export default class Operation extends React.Component {
       this.setState({isIncomeChecked: !this.state.isIncomeChecked});
     }
 
+    transactionMenuOpen = () => {
+        this.setState(({isToggleOpen}) => ({isToggleOpen: !isToggleOpen}));
+    }
+
     render() {
         const {categories} = this.props;
-        const {amount, accountId, commentValue, categoryName, isToggleOpen, isIncomeChecked} = this.state;
+        const {amount, accountId, commentValue, isToggleOpen, isIncomeChecked} = this.state;
 
         const accountMenu = isToggleOpen && <div>
         <div className="transaction-amount mb-8">

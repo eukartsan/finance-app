@@ -5,17 +5,18 @@ export default class Transfer extends React.Component {
       super()
 
       this.state = {
-        menuTransfer: true
+        menuTransfer: false
       }
 
       }
 
-    addTransfer = () => {
+    openTransferMenu = () => {
         this.setState(({menuTransfer}) => ({menuTransfer: !menuTransfer}));
     }
 
   render() {
-    const {accountsList, menuTransfer} = this.props;
+    const {accountsList} = this.props;
+    const {menuTransfer} = this.state;
     const scoreFromAccount = accountsList.map((item) => {
             const {accountName, total} = item;
 
@@ -32,29 +33,31 @@ export default class Transfer extends React.Component {
             )
         })
 
+    const transferList = menuTransfer && <div>
+      <form>
+        <div className="transaction-amount mb-8">
+          <label>From Score:</label>
+          <select>
+            {scoreFromAccount}
+          </select>
+          <label>To Score:</label>
+          <select>
+            {scoreToAccount}
+          </select>
+          <label>Amount:</label>
+          <input placeholder="Amount"/>
+          <div className="transaction-buttons">
+            <button>Transfer</button>
+          </div>
+        </div>
+      </form>
+    </div>
+
         return(
           <div className="operation-list list-group-item">
             <h3>Transfer to another account: </h3>
-            <button>{menuTransfer ? 'Close' : 'Open'}</button>
-            <div>
-              <form>
-                <div className="transaction-amount mb-8">
-                  <label>From Score:</label>
-                  <select>
-                    {scoreFromAccount}
-                  </select>
-                  <label>To Score:</label>
-                  <select>
-                    {scoreToAccount}
-                  </select>
-                  <label>Amount:</label>
-                  <input placeholder="Amount"/>
-                  <div>
-                    <button>Transfer</button>
-                  </div>
-                </div>
-              </form>
-            </div>
+            <button onClick={this.openTransferMenu}>{menuTransfer ? 'Close' : 'Open'}</button>
+            {transferList}
           </div>
         )
 

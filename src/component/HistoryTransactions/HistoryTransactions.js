@@ -9,7 +9,7 @@ export default class HistoryTransactions extends React.Component {
           menuOpen: true
         }
       }
-      
+
       historyMenuOpen = () => {
           this.setState(({menuOpen}) => ({menuOpen: !menuOpen}));
       }
@@ -27,7 +27,7 @@ export default class HistoryTransactions extends React.Component {
             })
 
 
-        const transactionHeaderMenu = transactionMenu.map((transactionMenu) => {
+        const transactionHeaderMenu = menuOpen && transactionMenu.map((transactionMenu) => {
           return (
 
               <div className="transactions-container">
@@ -59,7 +59,6 @@ export default class HistoryTransactions extends React.Component {
 
                 return (
                     <div className="transactions-container">
-                    {transactionHeaderMenu}
                       <div className="transaction-block-item">
                         <div className="transaction-item">
                             {newAccount && newAccount.accountName || 'Deleted account'}
@@ -88,7 +87,7 @@ export default class HistoryTransactions extends React.Component {
                 <button onClick={this.historyMenuOpen}>
                   {menuOpen ? 'Close' : 'Open'}
                 </button>
-
+                {transactionHeaderMenu}
                 {transactionList}
             </div>
         )
