@@ -36,11 +36,11 @@ export default class App extends React.Component {
               },
             ],
             categories: [
-                {id: 1, label: ' ', income: true},
-                {id: 2, label: ' ', income: false},
-                {id: 3, label: 'CatInCome1', income: true},
-                {id: 4, label: 'CatInCome2', income: true},
-                {id: 5, label: 'CatInCome3', income: false}
+                {id: uuidv4(), label: ' ', income: true},
+                {id: uuidv4(), label: ' ', income: false},
+                {id: uuidv4(), label: 'CatInCome1', income: true},
+                {id: uuidv4(), label: 'CatInCome2', income: true},
+                {id: uuidv4(), label: 'CatInCome3', income: false}
             ],
 
         }

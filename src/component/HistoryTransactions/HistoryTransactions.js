@@ -45,6 +45,9 @@ export default class HistoryTransactions extends React.Component {
                       {transactionMenu.datetime}
                   </div>
                   <div className="transaction-item">
+                      {transactionMenu.category}
+                  </div>
+                  <div className="transaction-item">
                       {transactionMenu.income}
                   </div>
                   </div>
@@ -53,8 +56,9 @@ export default class HistoryTransactions extends React.Component {
       })
 
         const transactionList = menuOpen && transactions.map((transaction) => {
-                const {amount, account_id, comment: commentValue, datetime, isIncome} = transaction;
+                const {amount, account_id, comment: commentValue, datetime, isIncome, income, id} = transaction;
                 const newAccount = accountsList.find(el => el.id === account_id);
+                const newCategory = categories.find(el => el.id === id);
                 //console.log(newAccount.accountName, 'newAccount.accountName')
 
                 return (
@@ -71,6 +75,9 @@ export default class HistoryTransactions extends React.Component {
                         </div>
                         <div className="transaction-item">
                             {datetime}
+                        </div>
+                        <div className="transaction-item">
+                            {newCategory.label}
                         </div>
                         <div className="transaction-item">
                             {isIncome ? 'Income' : 'Expence'}
