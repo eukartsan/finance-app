@@ -76,7 +76,7 @@ export default class HistoryTransactions extends React.Component {
         )
 
         return (
-            <div className="transactions-container">
+            <div className="transactions-container list-group-item">
                 <h3>History Transaction:</h3>
                 <button onClick={this.historyMenuOpen}>
                     {menuOpen ? 'Close' : 'Open'}

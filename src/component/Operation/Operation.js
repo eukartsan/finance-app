@@ -88,7 +88,7 @@ export default class Operation extends React.Component {
 
     render() {
         const {categories} = this.props;
-        const {amount, comment, isToggleOpen, isIncomeChecked} = this.state;
+        const {amount, comment, isToggleOpen, isIncomeChecked, accountName} = this.state;
 
         const accountMenu = isToggleOpen && <div>
             <div className="transaction-amount mb-8">
@@ -133,7 +133,7 @@ export default class Operation extends React.Component {
             </div>
             <div className="transaction-buttons">
                 <div>
-                    <button onClick={this.addIncome} disabled={amount === ''}>Save</button>
+                    <button onClick={this.addIncome} disabled={accountName === '' || amount === ''}>Save</button>
                 </div>
                 <div>
                     <button>Cancel</button>

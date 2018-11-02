@@ -67,30 +67,34 @@ export default class Accounts extends React.Component {
                 <li key={id} className="account-list list-group-item">
                     {active
                         ?
-                        <label>
+                        <label className="account-items">
                             <input
                                 name="accountName"
                                 type="text"
                                 value={accountItemName}
                                 onChange={this.editAccountName(id)}
-                                className="input-name"
+                                className="input-name account-items-name"
                             />
                             <button
                                 onClick={this.setActive(id)}
+                                className="account-buttons"
                             >
                                 Exit
                             </button>
                             <button
                                 onClick={this.deleteAccount(id)}
+                                className="account-buttons"
                             >
                                 Delete
                             </button>
                         </label>
-                        : <span>
-                        {accountItemName}
-                        <button onClick={this.setActive(id)}>Edit</button>
-                        <button onClick={this.deleteAccount(id)}>Delete</button>
-                    </span>
+                        : <div className="account-items">
+                          <div className="account-items-name">
+                            {accountItemName}
+                          </div>
+                          <button className="account-buttons" onClick={this.setActive(id)}>Edit</button>
+                          <button className="account-buttons" onClick={this.deleteAccount(id)}>Delete</button>
+                        </div>
                     }
                 </li>
             );

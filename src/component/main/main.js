@@ -4,6 +4,7 @@ import Accounts from '../Accounts/Accounts';
 import NewCategory from '../NewCategory/NewCategory';
 import uuidv4 from 'uuid/v4';
 import HistoryTransactions from "../HistoryTransactions/HistoryTransactions";
+import './main.css';
 
 export default class App extends React.Component {
     constructor() {
@@ -120,21 +121,29 @@ export default class App extends React.Component {
                     editAccountName={this.editAccount}
                     setAccountActive={this.setAccountActive}
                 />
-                <Operation
-                    accountsList={accounts}
-                    onAddTransaction={this.addTransaction}
-                    transactions={transactions}
-                    categories={categories}
-                />
-                <NewCategory
-                    categories={categories}
-                />
-                <HistoryTransactions
-                    transactions={transactions}
-                    accountsList={accounts}
-                    transactionMenu={transactionMenu}
-                    categories={categories}
-                />
+                <div className="main-items-list">
+                  <div>
+                    <Operation
+                        accountsList={accounts}
+                        onAddTransaction={this.addTransaction}
+                        transactions={transactions}
+                        categories={categories}
+                    />
+                  </div>
+                  <div>
+                    <NewCategory
+                        categories={categories}
+                    />
+                  </div>
+                  <div>
+                    <HistoryTransactions
+                        transactions={transactions}
+                        accountsList={accounts}
+                        transactionMenu={transactionMenu}
+                        categories={categories}
+                    />
+                  </div>
+                </div>
             </div>
         );
     }
