@@ -108,8 +108,7 @@ export default class Accounts extends React.Component {
                               <span>Account name: </span>
                               <input name="newAccountName" type="text" value={accountName} onChange={this.handleChange}/>
                           </label>
-                          <input type="submit" value="Submit"/>
-                          <button onClick={this.accountsArchive}>Archive</button>
+                          <input type="submit" value="Add"/>
                       </form>
 
                   </div>

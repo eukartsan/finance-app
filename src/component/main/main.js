@@ -23,7 +23,7 @@ export default class App extends React.Component {
                     amount: 100.12,
                     isIncome: false,
                     comment: 'my first income',
-                    categoryName: 'Visa 2'
+                    categoryName: 'Visa 2',
                 },
             ],
             transactionMenu: [
@@ -121,7 +121,7 @@ export default class App extends React.Component {
                     editAccountName={this.editAccount}
                     setAccountActive={this.setAccountActive}
                 />
-                <div className="main-items-list">
+                <div className="main-items-list" >
                   <div>
                     <Operation
                         accountsList={accounts}

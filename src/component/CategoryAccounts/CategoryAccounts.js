@@ -7,6 +7,10 @@ export default class CategoryAccounts extends React.Component {
         this.props.setCategory(event);
     }
 
+    removeCategory = (event) => {
+      this.props.removeCategory(event);
+    }
+
     render() {
         const {categories, isIncomeChecked} = this.props;
         const categoriesList = categories
@@ -23,6 +27,7 @@ export default class CategoryAccounts extends React.Component {
             <div>
                 <select
                     onChange={this.selectCategory}
+                    ref={elem => this.removeCategory = elem}
                     className="select-item">
                     {categoriesList}
                 </select>

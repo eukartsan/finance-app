@@ -52,7 +52,7 @@ export default class NewCategory extends React.Component {
             onChange={this.handleChange}
             />
           <div>
-          <form>
+          <div>
           <input type="checkbox"
                  id="income"
                  name="transaction"
@@ -60,7 +60,7 @@ export default class NewCategory extends React.Component {
                  onChange={this.newIncomeChange}
                  />
                <label htmlFor="income" className="label label-checkbox"> Is income?</label>
-          </form>
+          </div>
               </div>
             <div className="transaction-buttons">
               <button type="submit" value="Submit" onChange={this.addNewCategory}>Save</button>

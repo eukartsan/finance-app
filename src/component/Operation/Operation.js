@@ -21,13 +21,13 @@ export default class Operation extends React.Component {
         const {amount, comment, isIncomeChecked, categoryName, accountName} = this.state;
 
         this.props.onAddTransaction(amount, dateTime, comment, isIncomeChecked, categoryName, accountName);
-
+        this.removeAccount.value = null
         this.setState({
             amount: '',
             comment: '',
             categoryName: '',
-            accountName: '',
         })
+
     }
 
     accountsList() {
@@ -44,8 +44,8 @@ export default class Operation extends React.Component {
         return (
             <select
                 className="select-item"
-                /*onChange={this.setAccountValue}
-                ref={elem => this.selectElem = elem}*/
+                /*onChange={this.setAccountValue}*/
+                ref={elem => this.removeAccount = elem}
                 onChange={this.selectAccount}
                 value={accountName}
             >
@@ -111,6 +111,7 @@ export default class Operation extends React.Component {
                 <label>Select Category:</label>
                 <CategoryAccounts
                     categories={categories}
+                    removeCategory={this.removeCategory}
                     setCategory={this.selectCategory}
                     isIncomeChecked={isIncomeChecked}
                 />
