@@ -6,7 +6,7 @@ export default class NewCategory extends React.Component {
 
         this.state = {
           newIsIncomeChecked: false,
-          menuCategoryOpen: false,
+          menuCategoryOpen: true,
           categoryName: ''
         }
       }

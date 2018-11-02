@@ -8,53 +8,30 @@ export default class Operation extends React.Component {
 
         this.state = {
             amount: '',
-            accountId: null,
             categoryName: '',
-            commentValue: '',
+            comment: '',
             isIncomeChecked: false,
-            isToggleOpen: false
+            isToggleOpen: true,
+            accountName: ''
         }
     }
 
     addIncome = () => {
         const dateTime = Date(Date.now());
-        const {amount, accountId, commentValue, isIncomeChecked} = this.state;
-        this.props.onSelectAccount(amount, accountId, dateTime, commentValue, isIncomeChecked);
-        this.selectElem.value = null
+        const {amount, comment, isIncomeChecked, categoryName, accountName} = this.state;
+
+        this.props.onAddTransaction(amount, dateTime, comment, isIncomeChecked, categoryName, accountName);
+
         this.setState({
             amount: '',
-            accountId: null,
-            commentValue: ''
-        })
-        console.log(amount, accountId, dateTime, commentValue, 'amount, accountId, dateTime, commentValue')
-    }
-
-    amountOnRegular = () => {
-        const {amount} = this.state;
-        const reg = /[.^0-9.,]/g;
-        const found = amount.match(reg);
-        console.log(found, 'found')
-    }
-
-    addExpense = () => {
-        const dateTime = Date(Date.now());
-        const {amount, accountId, commentValue} = this.state;
-        this.props.onSelectAccount(amount, accountId, dateTime, commentValue);
-        this.selectElem.value = null
-        this.setState({
-            amount: '',
-            accountId: null
-        })
-    }
-
-    setAccountValue = (event) => {
-        this.setState({
-            accountId: event.target.options[event.target.selectedIndex].dataset.id
+            comment: '',
+            categoryName: '',
+            accountName: ''
         })
     }
 
     accountsList() {
-        const {accountsList} = this.props;
+        const {accountsList, accountName} = this.props;
         const accountsName = accountsList.map((account) => {
             const {accountName, id} = account;
             return (
@@ -67,12 +44,20 @@ export default class Operation extends React.Component {
         return (
             <select
                 className="select-item"
-                onChange={this.setAccountValue}
-                ref={elem => this.selectElem = elem}
+                /*onChange={this.setAccountValue}
+                ref={elem => this.selectElem = elem}*/
+                onChange={this.selectAccount}
+                value={accountName}
             >
                 {accountsName}
             </select>
         )
+    }
+
+    selectAccount = (event) => {
+        this.setState({
+            accountName: event.target.value
+        })
     }
 
     changeAmount = (event) => {
@@ -83,18 +68,18 @@ export default class Operation extends React.Component {
 
     addComment = (event) => {
         this.setState({
-            commentValue: event.target.value
+            comment: event.target.value
         })
     }
 
-    setCategoryValue = (event) => {
+    selectCategory = (event) => {
         this.setState({
-            label: event.target.value
+            categoryName: event.target.value
         })
     }
 
     incomeChange = () => {
-      this.setState({isIncomeChecked: !this.state.isIncomeChecked});
+        this.setState({isIncomeChecked: !this.state.isIncomeChecked});
     }
 
     transactionMenuOpen = () => {
@@ -103,64 +88,64 @@ export default class Operation extends React.Component {
 
     render() {
         const {categories} = this.props;
-        const {amount, accountId, commentValue, isToggleOpen, isIncomeChecked} = this.state;
+        const {amount, comment, isToggleOpen, isIncomeChecked} = this.state;
 
         const accountMenu = isToggleOpen && <div>
-        <div className="transaction-amount mb-8">
-            <label className="label">Select Score:</label>
-            <div className="operation-item accountsList">
-                {this.accountsList()}
+            <div className="transaction-amount mb-8">
+                <label className="label">Select account:</label>
+                <div className="operation-item">
+                    {this.accountsList()}
+                </div>
             </div>
-        </div>
-        <div className="transaction-checkbox mb-8">
-            <input type="checkbox"
-                   id="income"
-                   name="transaction"
-                   value="income"
-                   onChange={this.incomeChange}
-            />
-            <label htmlFor="income" className="label label-checkbox"> Is income?</label>
-           {/* <div>{isChecked ? 'checked' : 'unchecked'}</div>*/}
-        </div>
-        <div className="transaction-amount mb-8">
-            <label>Select Category:</label>
-            <CategoryAccounts
-                categories={categories}
-                setCategoryValue={this.setCategoryValue}
-                isIncomeChecked={isIncomeChecked}
-            />
-        </div>
-        <div className="transaction-amount mb-8">
-            <label>Enter Amount:</label>
-            <input
-                className="amount-label"
-                placeholder="Amount"
-                value={amount}
-                onChange={this.changeAmount}/>
-        </div>
-        <div>
+            <div className="transaction-checkbox mb-8">
+                <input type="checkbox"
+                       id="income"
+                       name="transaction"
+                       value="income"
+                       onChange={this.incomeChange}
+                />
+                <label htmlFor="income" className="label label-checkbox"> Is income?</label>
+                {/* <div>{isChecked ? 'checked' : 'unchecked'}</div>*/}
+            </div>
+            <div className="transaction-amount mb-8">
+                <label>Select Category:</label>
+                <CategoryAccounts
+                    categories={categories}
+                    setCategory={this.selectCategory}
+                    isIncomeChecked={isIncomeChecked}
+                />
+            </div>
+            <div className="transaction-amount mb-8">
+                <label>Enter Amount:</label>
+                <input
+                    className="amount-label"
+                    placeholder="Amount"
+                    value={amount}
+                    onChange={this.changeAmount}/>
+            </div>
+            <div>
                 <textarea
                     className="comment-value"
                     placeholder="Comment"
                     rows="3"
-                    value={commentValue}
+                    value={comment}
                     onChange={this.addComment}></textarea>
-        </div>
-        <div className="transaction-buttons">
-            <div>
-                <button onClick={this.addIncome} disabled={amount === '' || accountId === null}>Save</button>
             </div>
-            <div>
-                <button>Cancel</button>
+            <div className="transaction-buttons">
+                <div>
+                    <button onClick={this.addIncome} disabled={amount === ''}>Save</button>
+                </div>
+                <div>
+                    <button>Cancel</button>
+                </div>
             </div>
         </div>
-        </div>
-        return (
 
+        return (
             <div className="operation-list list-group-item">
                 <h3>Account transactions: </h3>
                 <button onClick={this.transactionMenuOpen}>
-                  {isToggleOpen ? 'Close' : 'Open'}
+                    {isToggleOpen ? 'Close' : 'Open'}
                 </button>
                 {accountMenu}
             </div>

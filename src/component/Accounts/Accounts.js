@@ -61,7 +61,7 @@ export default class Accounts extends React.Component {
         const account = accountsList
             .filter((item) => item.isArchived === false)
             .map((item) => {
-            const {id, accountName: accountItemName, total, active} = item;
+            const {id, accountName: accountItemName, active} = item;
 
             return (
                 <li key={id} className="account-list list-group-item">
@@ -73,24 +73,23 @@ export default class Accounts extends React.Component {
                                 type="text"
                                 value={accountItemName}
                                 onChange={this.editAccountName(id)}
-                            />: {total} UAH
+                                className="input-name"
+                            />
                             <button
-                                className="d-flex float-right"
                                 onClick={this.setActive(id)}
                             >
                                 Exit
                             </button>
                             <button
-                                className="d-flex float-right"
                                 onClick={this.deleteAccount(id)}
                             >
                                 Delete
                             </button>
                         </label>
                         : <span>
-                        {accountItemName} : {total} UAH
-                        <button className="d-flex float-right" onClick={this.setActive(id)}>Edit</button>
-                        <button className="d-flex float-right" onClick={this.deleteAccount(id)}>Delete</button>
+                        {accountItemName}
+                        <button onClick={this.setActive(id)}>Edit</button>
+                        <button onClick={this.deleteAccount(id)}>Delete</button>
                     </span>
                     }
                 </li>

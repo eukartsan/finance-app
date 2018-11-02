@@ -4,7 +4,6 @@ import Accounts from '../Accounts/Accounts';
 import NewCategory from '../NewCategory/NewCategory';
 import uuidv4 from 'uuid/v4';
 import HistoryTransactions from "../HistoryTransactions/HistoryTransactions";
-import Transfer from "../Transfer/Transfer";
 
 export default class App extends React.Component {
     constructor() {
@@ -12,35 +11,36 @@ export default class App extends React.Component {
 
         this.state = {
             accounts: [
-                {id: 'f19947e9-0638-4080-9706-900c8fd01c9d', accountName: 'Score 1', total: 0, active: false, isArchived: false},
-                {id: uuidv4(), accountName: 'Score 2', total: 20, active: false, isArchived: false},
-                {id: uuidv4(), accountName: 'Score 3', total: 100, active: false, isArchived: false},
+                {id: 'f19947e9-0638-4080-9706-900c8fd01c9d', accountName: 'Mastercard 1', active: false, isArchived: false},
+                {id: uuidv4(), accountName: 'Visa 2', active: false, isArchived: false},
+                {id: uuidv4(), accountName: 'Card 3', active: false, isArchived: false},
             ],
             transactions: [
                 {
-                    account_id: 'f19947e9-0638-4080-9706-900c8fd01c9d',
+                    accountName: 'Mastercard 1',
                     datetime: '20-12-83',
                     amount: 100.12,
                     isIncome: false,
-                    comment: 'my first income'
+                    comment: 'my first income',
+                    categoryName: 'Visa 2'
                 },
             ],
             transactionMenu: [
               {
-                score: 'Score',
+                accountName: 'Account name',
                 amount: 'Amount',
                 comment: 'Comment',
-                datetime: 'DateTime',
+                datetime: 'Date',
                 category: 'Category',
-                income: 'Income'
+                income: 'Income or expense'
               },
             ],
             categories: [
-                {id: uuidv4(), label: ' ', income: true},
-                {id: uuidv4(), label: ' ', income: false},
-                {id: uuidv4(), label: 'CatInCome1', income: true},
-                {id: uuidv4(), label: 'CatInCome2', income: true},
-                {id: uuidv4(), label: 'CatInCome3', income: false}
+                {id: uuidv4(), nameCategory: ' ', income: true},
+                {id: uuidv4(), nameCategory: ' ', income: false},
+                {id: 'f19947e9-0638-4080-9706-900c8fd01c99', nameCategory: 'CatInCome1', income: true},
+                {id: uuidv4(), nameCategory: 'CatInCome2', income: true},
+                {id: uuidv4(), nameCategory: 'CatInCome3', income: false}
             ],
 
         }
@@ -50,7 +50,6 @@ export default class App extends React.Component {
         this.setState((prevState) => {
             const accountObj = {
                 accountName,
-                total: '0',
                 id: uuidv4(),
                 active: false,
                 isArchived: false
@@ -91,14 +90,16 @@ export default class App extends React.Component {
         })
     }
 
-    selectAccount = (amount, accountId, dateTime, commentValue, isIncome) => {
+    //this.props.onSelectAccount(amount, dateTime, comment, isIncomeChecked, categoryName, accountName
+    addTransaction = (amount, datetime, comment, isIncome, categoryName, accountName) => {
         this.setState((prevState) => {
             const transactionsIncome = {
-                account_id: accountId,
+                accountName,
+                datetime,
                 amount,
                 isIncome,
-                datetime: dateTime,
-                comment: commentValue
+                comment,
+                categoryName
             }
 
             return {
@@ -121,12 +122,9 @@ export default class App extends React.Component {
                 />
                 <Operation
                     accountsList={accounts}
-                    onSelectAccount={this.selectAccount}
+                    onAddTransaction={this.addTransaction}
                     transactions={transactions}
                     categories={categories}
-                />
-                <Transfer
-                    accountsList={accounts}
                 />
                 <NewCategory
                     categories={categories}
