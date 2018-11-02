@@ -26,7 +26,7 @@ export default class Operation extends React.Component {
             amount: '',
             comment: '',
             categoryName: '',
-            accountName: ''
+            accountName: '',
         })
     }
 

@@ -12,10 +12,10 @@ export default class CategoryAccounts extends React.Component {
         const categoriesList = categories
             .filter((item) => item.income === isIncomeChecked)
             .map((item) => {
-                const {nameCategory} = item;
+                const {categoryName} = item;
 
                 return (
-                    <option key={item.id}>{nameCategory}</option>
+                    <option key={item.id}>{categoryName}</option>
                 )
             })
 

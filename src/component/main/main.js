@@ -37,11 +37,11 @@ export default class App extends React.Component {
               },
             ],
             categories: [
-                {id: uuidv4(), nameCategory: ' ', income: true},
-                {id: uuidv4(), nameCategory: ' ', income: false},
-                {id: 'f19947e9-0638-4080-9706-900c8fd01c99', nameCategory: 'CatInCome1', income: true},
-                {id: uuidv4(), nameCategory: 'CatInCome2', income: true},
-                {id: uuidv4(), nameCategory: 'CatInCome3', income: false}
+                {id: uuidv4(), categoryName: ' ', income: true},
+                {id: uuidv4(), categoryName: ' ', income: false},
+                {id: 'f19947e9-0638-4080-9706-900c8fd01c99', categoryName: 'CatInCome1', income: true},
+                {id: uuidv4(), categoryName: 'CatInCome2', income: true},
+                {id: uuidv4(), categoryName: 'CatInCome3', income: false}
             ],
 
         }

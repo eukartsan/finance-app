@@ -39,7 +39,6 @@ export default class NewCategory extends React.Component {
   }
 
   render() {
-    const {categories} = this.props;
     const {menuCategoryOpen, categoryName} = this.state;
 
     const newCategoryMenu = menuCategoryOpen &&

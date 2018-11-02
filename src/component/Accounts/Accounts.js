@@ -1,6 +1,5 @@
 import React, {Fragment} from 'react';
 
-import AccountsNum from '../AccountsNum';
 import './Accounts.css';
 
 export default class Accounts extends React.Component {
@@ -32,9 +31,7 @@ export default class Accounts extends React.Component {
     deleteAccount = (id) => (event) => {
 
         event.preventDefault();
-        const {onDeleted, accounts} = this.props,
 
-         {isArchived} = this.state
         //onDeleted(id);
 
         this.setState(prevState => (
