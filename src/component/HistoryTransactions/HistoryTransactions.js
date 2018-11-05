@@ -1,6 +1,10 @@
 import React from 'react';
 import './HistoryTransactions.css';
 
+const transactionItem = (value) => <div className="transaction-item">
+    {value}
+</div>;
+
 export default class HistoryTransactions extends React.Component {
     constructor() {
         super()
@@ -14,70 +18,49 @@ export default class HistoryTransactions extends React.Component {
         this.setState(({menuOpen}) => ({menuOpen: !menuOpen}));
     }
 
-
-
     render() {
         const {transactions, transactionMenu} = this.props;
         const {menuOpen} = this.state;
 
         const transactionHeaderMenu = menuOpen && transactionMenu.map((transactionMenu) => {
             return (
-                <div className="transactions-container">
-                    <div className="transaction-block-item" >
-                        <div className="transaction-item" >
-                            {transactionMenu.accountName}
-                        </div>
-                        <div className="transaction-item" >
-                            {transactionMenu.amount}
-                        </div>
-                        <div className="transaction-item" >
-                            {transactionMenu.comment}
-                        </div>
-                        <div className="transaction-item" >
-                            {transactionMenu.datetime}
-                        </div>
-                        <div className="transaction-item" >
-                            {transactionMenu.category}
-                        </div>
-                        <div className="transaction-item" >
-                            {transactionMenu.income}
-                        </div>
-                    </div>
+                <div className="transaction-block-item">
+                    {transactionItem(transactionMenu.accountName)}
+                    {transactionItem(transactionMenu.amount)}
+                    {transactionItem(transactionMenu.comment)}
+                    {transactionItem(transactionMenu.datetime)}
+                    {transactionItem(transactionMenu.category)}
+                    {transactionItem(transactionMenu.income)}
                 </div>
             )
         })
 
         const transactionList = menuOpen && transactions.map((transaction) => {
-        const {amount, datetime, comment, isIncome, categoryName, accountName} = transaction;
+            const {amount, datetime, comment, isIncome, categoryName, accountName} = transaction;
 
+            const items = Object.values(transaction).map((item) => {
                 return (
-                    <div className="transactions-container">
-                      <div className="transaction-block-item" >
-                            <div className="transaction-item" >
-                              {accountName}
-                            </div>
-                            <div className="transaction-item" >
-                              {amount}
-                            </div>
-                            <div className="transaction-item">
-                                {comment}
-                            </div>
-                            <div className="transaction-item">
-                                {datetime}
-                            </div>
-                            <div className="transaction-item" >
-                                {categoryName}
-                            </div>
-                            <div className="transaction-item" >
-                                {isIncome ? 'Income' : 'Expense'}
-                            </div>
-                        </div>
+                    <div className="transaction-item">
+                        {item}
                     </div>
                 )
+            })
+
+            return (
+                <div className="transaction-block-item">
+                    {transactionItem(accountName)}
+                    {transactionItem(amount)}
+                    {transactionItem(comment)}
+                    {transactionItem(datetime)}
+                    {transactionItem(categoryName)}
+                    {transactionItem(isIncome ? 'Income' : 'Expense')}
+                </div>
+            )
             }
         )
 
         return (
+
             <div className="transactions-container list-group-item">
                 <h3>History Transaction:</h3>
                 <button onClick={this.historyMenuOpen}>

@@ -12,9 +12,10 @@ export default class App extends React.Component {
 
         this.state = {
             accounts: [
-                {id: 'f19947e9-0638-4080-9706-900c8fd01c9d', accountName: 'Mastercard 1', active: false, isArchived: false},
-                {id: uuidv4(), accountName: 'Visa 2', active: false, isArchived: false},
-                {id: uuidv4(), accountName: 'Card 3', active: false, isArchived: false},
+                {id: 'f19947e9-0638-4080-9706-900c8fd01c9d', accountName: '', active: false},
+                {id: uuidv4(), accountName: 'Mastercard 1', active: false},
+                {id: uuidv4(), accountName: 'Visa 2', active: false},
+                {id: uuidv4(), accountName: 'Card 3', active: false},
             ],
             transactions: [
                 {
@@ -53,7 +54,6 @@ export default class App extends React.Component {
                 accountName,
                 id: uuidv4(),
                 active: false,
-                isArchived: false
             }
 
             return {
@@ -147,5 +147,4 @@ export default class App extends React.Component {
             </div>
         );
     }
-
 }

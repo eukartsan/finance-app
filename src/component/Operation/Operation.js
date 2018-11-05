@@ -16,12 +16,21 @@ export default class Operation extends React.Component {
         }
     }
 
+    resetSelectedAccount = () => {
+        this.selectedAccount.value = null
+    }
+
+    // resetSelectedCategory = (ref) => {
+    //     ref.value = null
+    // }
+
     addIncome = () => {
         const dateTime = Date(Date.now());
         const {amount, comment, isIncomeChecked, categoryName, accountName} = this.state;
 
         this.props.onAddTransaction(amount, dateTime, comment, isIncomeChecked, categoryName, accountName);
-        this.removeAccount.value = null
+        this.resetSelectedAccount();
+        //this.resetSelectedCategory();
         this.setState({
             amount: '',
             comment: '',
@@ -45,7 +54,7 @@ export default class Operation extends React.Component {
             <select
                 className="select-item"
                 /*onChange={this.setAccountValue}*/
-                ref={elem => this.removeAccount = elem}
+                ref={elem => this.selectedAccount = elem}
                 onChange={this.selectAccount}
                 value={accountName}
             >
@@ -61,9 +70,11 @@ export default class Operation extends React.Component {
     }
 
     changeAmount = (event) => {
-        this.setState({
-            amount: event.target.value
-        })
+        if (/^\d+$/.test(event.target.value)) {
+            this.setState({
+                amount: parseInt(event.target.value, 10)
+            })
+        }
     }
 
     addComment = (event) => {
@@ -111,9 +122,10 @@ export default class Operation extends React.Component {
                 <label>Select Category:</label>
                 <CategoryAccounts
                     categories={categories}
-                    removeCategory={this.removeCategory}
+                    removeSelectCategory={this.removeSelectCategory}
                     setCategory={this.selectCategory}
                     isIncomeChecked={isIncomeChecked}
+                    resetSelectedCategory={this.resetSelectedCategory}
                 />
             </div>
             <div className="transaction-amount mb-8">
@@ -134,7 +146,7 @@ export default class Operation extends React.Component {
             </div>
             <div className="transaction-buttons">
                 <div>
-                    <button onClick={this.addIncome} disabled={accountName === '' || amount === ''}>Save</button>
+                    <button onClick={this.addIncome} disabled={accountName === ''}>Save</button>
                 </div>
                 <div>
                     <button>Cancel</button>
