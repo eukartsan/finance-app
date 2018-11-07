@@ -1,4 +1,4 @@
-import React, {Fragment} from 'react';
+import React from 'react';
 
 import './Accounts.css';
 
@@ -8,6 +8,7 @@ export default class Accounts extends React.Component {
 
         this.state = {
             accountName: '',
+            isMenuOpen: ''
         };
     }
 
@@ -45,9 +46,28 @@ export default class Accounts extends React.Component {
         setAccountActive(id);
     }
 
+    accountsMenuOpen = () => {
+        this.setState(({isMenuOpen}) => ({isMenuOpen: !isMenuOpen}));
+    }
+
     render() {
         const {accountsList} = this.props,
-            {accountName} = this.state
+            {accountName, isMenuOpen} = this.state
+
+        const accountListMenu = isMenuOpen &&
+                              <div>
+                                <form onSubmit={this.addAccountName}>
+                                    <label>
+                                        <span>Account name: </span>
+                                        <input
+                                        name="newAccountName"
+                                        type="text"
+                                        value={accountName}
+                                        onChange={this.handleChange}/>
+                                    </label>
+                                    <input type="submit" value="Add"/>
+                                </form>
+                              </div>
 
         const account = accountsList
             .filter((item) => item.accountName !== '')
@@ -64,7 +84,7 @@ export default class Accounts extends React.Component {
                                     type="text"
                                     value={accountItemName}
                                     onChange={this.editAccountName(id)}
-                                    className="input-name account-items-name"
+                                    className="account-items-name"
                                 />
                                 <button
                                     onClick={this.setActive(id)}
@@ -80,7 +100,7 @@ export default class Accounts extends React.Component {
                                 </button>
                             </label>
                             : <div className="account-items">
-                                <div className="account-items-name">
+                                <div className="account-items-names">
                                     {accountItemName}
                                 </div>
                                 <button className="account-buttons" onClick={this.setActive(id)}>Edit</button>
@@ -92,24 +112,16 @@ export default class Accounts extends React.Component {
             });
 
         return (
-            <Fragment>
-                <div className="app-header">
+                <div className="app-header list-group-item">
                     <h3>Balance</h3>
-                    <div>
-                        <form onSubmit={this.addAccountName}>
-                            <label>
-                                <span>Account name: </span>
-                                <input name="newAccountName" type="text" value={accountName}
-                                       onChange={this.handleChange}/>
-                            </label>
-                            <input type="submit" value="Add"/>
-                        </form>
-                    </div>
+                    <button onClick={this.accountsMenuOpen}>
+                        {isMenuOpen ? 'Close' : 'Open'}
+                    </button>
+                    {accountListMenu}
                     <ul className="list-group-item">
                         {account}
                     </ul>
                 </div>
-            </Fragment>
         );
     };
 };
