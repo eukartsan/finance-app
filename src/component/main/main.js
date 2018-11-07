@@ -113,7 +113,12 @@ export default class App extends React.Component {
         const {accounts, transactions, categories, transactionMenu} = this.state;
 
         return (
-            <div>
+            <div className="main-items-lists">
+            <div className="main-items-header">
+              <h1>Income and expense accounting application</h1>
+            </div>
+            <div className="main-items-list">
+              <div>
                 <Accounts
                     accountsList={accounts}
                     addAccount={this.addAccount}
@@ -121,28 +126,28 @@ export default class App extends React.Component {
                     editAccountName={this.editAccount}
                     setAccountActive={this.setAccountActive}
                 />
-                <div className="main-items-list" >
-                  <div>
+                </div>
+                <div>
                     <Operation
                         accountsList={accounts}
                         onAddTransaction={this.addTransaction}
                         transactions={transactions}
                         categories={categories}
                     />
-                  </div>
-                  <div>
-                    <NewCategory
-                        categories={categories}
-                    />
-                  </div>
-                  <div>
+                </div>
+                <div>
+                  <NewCategory
+                      categories={categories}
+                  />
+                </div>
+                </div>
+                <div>
                     <HistoryTransactions
                         transactions={transactions}
                         accountsList={accounts}
                         transactionMenu={transactionMenu}
                         categories={categories}
                     />
-                  </div>
                 </div>
             </div>
         );

@@ -38,14 +38,6 @@ export default class HistoryTransactions extends React.Component {
         const transactionList = menuOpen && transactions.map((transaction) => {
             const {amount, datetime, comment, isIncome, categoryName, accountName} = transaction;
 
-            const items = Object.values(transaction).map((item) => {
-                return (
-                    <div className="transaction-item">
-                        {item}
-                    </div>
-                )
-            })
-
             return (
                 <div className="transaction-block-item">
                     {transactionItem(accountName)}

@@ -94,7 +94,6 @@ export default class Accounts extends React.Component {
         return (
             <Fragment>
                 <div className="app-header">
-                    <h1>Income and expense accounting application</h1>
                     <h3>Balance</h3>
                     <div>
                         <form onSubmit={this.addAccountName}>
@@ -105,7 +104,6 @@ export default class Accounts extends React.Component {
                             </label>
                             <input type="submit" value="Add"/>
                         </form>
-
                     </div>
                     <ul className="list-group-item">
                         {account}
