@@ -12,10 +12,10 @@ export default class App extends React.Component {
 
         this.state = {
             accounts: [
-                {id: 'f19947e9-0638-4080-9706-900c8fd01c9d', accountName: '', active: false},
-                {id: uuidv4(), accountName: 'Mastercard 1', active: false},
-                {id: uuidv4(), accountName: 'Visa 2', active: false},
-                {id: uuidv4(), accountName: 'Card 3', active: false},
+                { id: 'f19947e9-0638-4080-9706-900c8fd01c9d', accountName: '', active: false },
+                { id: uuidv4(), accountName: 'Mastercard 1', active: false },
+                { id: uuidv4(), accountName: 'Visa 2', active: false },
+                { id: uuidv4(), accountName: 'Card 3', active: false },
             ],
             transactions: [
                 {
@@ -28,23 +28,22 @@ export default class App extends React.Component {
                 },
             ],
             transactionMenu: [
-              {
-                accountName: 'Account name',
-                amount: 'Amount',
-                comment: 'Comment',
-                datetime: 'Date',
-                category: 'Category',
-                income: 'Income or expense'
-              },
+                {
+                    accountName: 'Account name',
+                    amount: 'Amount',
+                    comment: 'Comment',
+                    datetime: 'Date',
+                    category: 'Category',
+                    income: 'Income or expense'
+                },
             ],
             categories: [
-                {id: uuidv4(), categoryName: ' ', income: true},
-                {id: uuidv4(), categoryName: ' ', income: false},
-                {id: 'f19947e9-0638-4080-9706-900c8fd01c99', categoryName: 'CatInCome1', income: true},
-                {id: uuidv4(), categoryName: 'CatInCome2', income: true},
-                {id: uuidv4(), categoryName: 'CatInCome3', income: false}
+                { id: uuidv4(), categoryName: ' ', income: true },
+                { id: uuidv4(), categoryName: ' ', income: false },
+                { id: 'f19947e9-0638-4080-9706-900c8fd01c99', categoryName: 'CatInCome1', income: true },
+                { id: uuidv4(), categoryName: 'CatInCome2', income: true },
+                { id: uuidv4(), categoryName: 'CatInCome3', income: false }
             ],
-
         }
     }
 
@@ -72,8 +71,8 @@ export default class App extends React.Component {
 
     editAccount = (accountName, id) => {
         const accountsCopy = [...this.state.accounts];
-        const prevAccount = accountsCopy.find(prevAccount => prevAccount.id === id);
-        prevAccount.accountName = accountName;
+        const prevAccount = accountsCopy.find(prevAccount => prevAccount.id === id)
+        prevAccount.accountName = accountName
 
         this.setState({
             accounts: accountsCopy
@@ -82,16 +81,14 @@ export default class App extends React.Component {
 
     setAccountActive = (id) => {
         const accountsCopy = [...this.state.accounts];
-        const prevAccount = accountsCopy.find(prevAccount => prevAccount.id === id);
-        console.log(prevAccount, 'prevAccount')
-        prevAccount.active = !prevAccount.active;
+        const prevAccount = accountsCopy.find(prevAccount => prevAccount.id === id)
+        prevAccount.active = !prevAccount.active
 
         this.setState({
             accounts: accountsCopy
         })
     }
 
-    //this.props.onSelectAccount(amount, dateTime, comment, isIncomeChecked, categoryName, accountName
     addTransaction = (amount, datetime, comment, isIncome, categoryName, accountName) => {
         this.setState((prevState) => {
             const transactionsIncome = {
@@ -110,36 +107,36 @@ export default class App extends React.Component {
     }
 
     render() {
-        const {accounts, transactions, categories, transactionMenu} = this.state;
+        const { accounts, transactions, categories, transactionMenu } = this.state;
 
         return (
             <div className="main-items-lists">
-            <div className="main-items-header">
-              <h1>Income and expense accounting application</h1>
-            </div>
-            <div className="main-items-list">
-              <div>
-                <Accounts
-                    accountsList={accounts}
-                    addAccount={this.addAccount}
-                    onDeleted={this.deleteItem}
-                    editAccountName={this.editAccount}
-                    setAccountActive={this.setAccountActive}
-                />
+                <div className="main-items-header">
+                    <h1>Income and expense accounting application</h1>
                 </div>
-                <div>
-                    <Operation
-                        accountsList={accounts}
-                        onAddTransaction={this.addTransaction}
-                        transactions={transactions}
-                        categories={categories}
-                    />
-                </div>
-                <div>
-                  <NewCategory
-                      categories={categories}
-                  />
-                </div>
+                <div className="main-items-list">
+                    <div>
+                        <Accounts
+                            accountsList={accounts}
+                            addAccount={this.addAccount}
+                            onDeleted={this.deleteItem}
+                            editAccountName={this.editAccount}
+                            setAccountActive={this.setAccountActive}
+                        />
+                    </div>
+                    <div>
+                        <Operation
+                            accountsList={accounts}
+                            onAddTransaction={this.addTransaction}
+                            transactions={transactions}
+                            categories={categories}
+                        />
+                    </div>
+                    <div>
+                        <NewCategory
+                            categories={categories}
+                        />
+                    </div>
                 </div>
                 <div>
                     <HistoryTransactions
@@ -150,6 +147,6 @@ export default class App extends React.Component {
                     />
                 </div>
             </div>
-        );
+        )
     }
 }

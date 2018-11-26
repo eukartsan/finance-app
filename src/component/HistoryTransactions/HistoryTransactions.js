@@ -1,9 +1,10 @@
-import React from 'react';
-import './HistoryTransactions.css';
+import React from 'react'
+import './HistoryTransactions.css'
 
-const transactionItem = (value) => <div className="transaction-item">
-    {value}
-</div>;
+const transactionItem = (value) =>
+    <div className="transaction-item">
+        {value}
+    </div>;
 
 export default class HistoryTransactions extends React.Component {
     constructor() {
@@ -15,12 +16,12 @@ export default class HistoryTransactions extends React.Component {
     }
 
     historyMenuOpen = () => {
-        this.setState(({menuOpen}) => ({menuOpen: !menuOpen}));
+        this.setState(({ menuOpen }) => ({ menuOpen: !menuOpen }))
     }
 
     render() {
-        const {transactions, transactionMenu} = this.props;
-        const {menuOpen} = this.state;
+        const { transactions, transactionMenu } = this.props
+        const { menuOpen } = this.state
 
         const transactionHeaderMenu = menuOpen && transactionMenu.map((transactionMenu) => {
             return (
@@ -36,18 +37,26 @@ export default class HistoryTransactions extends React.Component {
         })
 
         const transactionList = menuOpen && transactions.map((transaction) => {
-            const {amount, datetime, comment, isIncome, categoryName, accountName} = transaction;
+                const { amount, datetime, comment, isIncome, categoryName, accountName } = transaction
 
-            return (
-                <div className="transaction-block-item">
-                    {transactionItem(accountName)}
-                    {transactionItem(amount)}
-                    {transactionItem(comment)}
-                    {transactionItem(datetime)}
-                    {transactionItem(categoryName)}
-                    {transactionItem(isIncome ? 'Income' : 'Expense')}
-                </div>
-            )
+                const items = Object.values(transaction).map((item) => {
+                    return (
+                        <div className="transaction-item">
+                            {items}
+                        </div>
+                    )
+                })
+
+                return (
+                    <div className="transaction-block-item">
+                        {transactionItem(accountName)}
+                        {transactionItem(amount)}
+                        {transactionItem(comment)}
+                        {transactionItem(datetime)}
+                        {transactionItem(categoryName)}
+                        {transactionItem(isIncome ? 'Income' : 'Expense')}
+                    </div>
+                )
             }
         )
 

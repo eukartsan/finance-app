@@ -20,53 +20,35 @@ export default class Operation extends React.Component {
         this.selectedAccount.value = null
     }
 
-    // resetSelectedCategory = (ref) => {
-    //     ref.value = null
-    // }
-
     addIncome = () => {
-        const dateTime = Date(Date.now());
-        const {amount, comment, isIncomeChecked, categoryName, accountName} = this.state;
-
+        const dateTime = Date(Date.now())
+        const { amount, comment, isIncomeChecked, categoryName, accountName } = this.state
         this.props.onAddTransaction(amount, dateTime, comment, isIncomeChecked, categoryName, accountName);
-        this.resetSelectedAccount();
-        //this.resetSelectedCategory();
-        this.setState({
-            amount: '',
-            comment: '',
-            categoryName: '',
-        })
-
+        this.resetSelectedAccount()
+        this.setState({ amount: '', comment: '', categoryName: '' })
     }
 
     accountsList() {
-        const {accountsList, accountName} = this.props;
+        const { accountsList, accountName } = this.props
         const accountsName = accountsList.map((account) => {
-            const {accountName, id} = account;
-            return (
-                <option key={id} data-id={id}>
-                    {accountName}
-                </option>
-            )
+            const { accountName, id } = account;
+            return (<option key={id} data-id={id}>
+                {accountName}
+            </option>)
         })
 
         return (
             <select
                 className="select-item"
-                /*onChange={this.setAccountValue}*/
                 ref={elem => this.selectedAccount = elem}
                 onChange={this.selectAccount}
-                value={accountName}
-            >
+                value={accountName}>
                 {accountsName}
-            </select>
-        )
+            </select>)
     }
 
     selectAccount = (event) => {
-        this.setState({
-            accountName: event.target.value
-        })
+        this.setState({ accountName: event.target.value })
     }
 
     changeAmount = (event) => {
@@ -78,28 +60,28 @@ export default class Operation extends React.Component {
     }
 
     addComment = (event) => {
-        this.setState({
-            comment: event.target.value
-        })
+        this.setState({ comment: event.target.value })
     }
 
     selectCategory = (event) => {
-        this.setState({
-            categoryName: event.target.value
-        })
+        this.setState({ categoryName: event.target.value })
     }
 
     incomeChange = () => {
-        this.setState({isIncomeChecked: !this.state.isIncomeChecked});
+        this.setState({
+            isIncomeChecked: !this.state.isIncomeChecked
+        });
     }
 
     transactionMenuOpen = () => {
-        this.setState(({isToggleOpen}) => ({isToggleOpen: !isToggleOpen}));
+        this.setState(({ isToggleOpen }) => ({
+            isToggleOpen: !isToggleOpen
+        }));
     }
 
     render() {
-        const {categories} = this.props;
-        const {amount, comment, isToggleOpen, isIncomeChecked, accountName} = this.state;
+        const { categories } = this.props;
+        const { amount, comment, isToggleOpen, isIncomeChecked, accountName } = this.state
 
         const accountMenu = isToggleOpen && <div>
             <div className="transaction-amount mb-8">
@@ -109,14 +91,14 @@ export default class Operation extends React.Component {
                 </div>
             </div>
             <div className="transaction-checkbox mb-8">
-                <input type="checkbox"
-                       id="income"
-                       name="transaction"
-                       value="income"
-                       onChange={this.incomeChange}
-                />
-                <label htmlFor="income" className="label label-checkbox"> Is income?</label>
-                {/* <div>{isChecked ? 'checked' : 'unchecked'}</div>*/}
+                <input
+                    type="checkbox"
+                    id="income"
+                    name="transaction"
+                    value="income"
+                    onChange={this.incomeChange} />
+                <label htmlFor="income"
+                       className="label label-checkbox"> Is income?</label>
             </div>
             <div className="transaction-amount mb-8">
                 <label>Select Category:</label>
@@ -125,16 +107,14 @@ export default class Operation extends React.Component {
                     removeSelectCategory={this.removeSelectCategory}
                     setCategory={this.selectCategory}
                     isIncomeChecked={isIncomeChecked}
-                    resetSelectedCategory={this.resetSelectedCategory}
-                />
+                    resetSelectedCategory={this.resetSelectedCategory} />
             </div>
             <div className="transaction-amount mb-8">
                 <label>Enter Amount:</label>
-                <input
-                    className="amount-label"
-                    placeholder="Amount"
-                    value={amount}
-                    onChange={this.changeAmount}/>
+                <input className="amount-label"
+                       placeholder="Amount"
+                       value={amount}
+                       onChange={this.changeAmount} />
             </div>
             <div>
                 <textarea
@@ -142,7 +122,8 @@ export default class Operation extends React.Component {
                     placeholder="Comment"
                     rows="3"
                     value={comment}
-                    onChange={this.addComment}></textarea>
+                    onChange={this.addComment}>
+                </textarea>
             </div>
             <div className="transaction-buttons">
                 <div>
@@ -154,14 +135,17 @@ export default class Operation extends React.Component {
             </div>
         </div>
 
-        return (
-            <div className="operation-list list-group-item">
-                <h3>Account transactions: </h3>
-                <button onClick={this.transactionMenuOpen}>
-                    {isToggleOpen ? 'Close' : 'Open'}
-                </button>
-                {accountMenu}
-            </div>
-        )
+        return (<div className="operation-list list-group-item">
+            <h3>Account transactions:
+            </h3>
+            <button onClick={this.transactionMenuOpen}>
+                {
+                    isToggleOpen
+                        ? 'Close'
+                        : 'Open'
+                }
+            </button>
+            {accountMenu}
+        </div>)
     }
 }
