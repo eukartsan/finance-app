@@ -14,7 +14,7 @@
 }
 
 .transaction-buttons {
-  width: 250px;
+  width: 150px;
   display: flex;
   margin: 5px 0px 15px;
   justify-content: space-around;

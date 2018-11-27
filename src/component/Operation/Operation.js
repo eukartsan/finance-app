@@ -21,11 +21,15 @@ export default class Operation extends React.Component {
     }
 
     addIncome = () => {
-        const dateTime = Date(Date.now())
+        const dateTime = (new Date().toDateString())
         const { amount, comment, isIncomeChecked, categoryName, accountName } = this.state
         this.props.onAddTransaction(amount, dateTime, comment, isIncomeChecked, categoryName, accountName);
         this.resetSelectedAccount()
-        this.setState({ amount: '', comment: '', categoryName: '' })
+        this.setState({ amount: '', comment: '' })
+    }
+
+    onCancel = () => {
+        this.setState({ amount: '', comment: ''})
     }
 
     accountsList() {
@@ -81,7 +85,7 @@ export default class Operation extends React.Component {
 
     render() {
         const { categories } = this.props;
-        const { amount, comment, isToggleOpen, isIncomeChecked, accountName } = this.state
+        const { amount, comment, isToggleOpen, isIncomeChecked } = this.state
 
         const accountMenu = isToggleOpen && <div>
             <div className="transaction-amount mb-8">
@@ -104,10 +108,8 @@ export default class Operation extends React.Component {
                 <label>Select Category:</label>
                 <CategoryAccounts
                     categories={categories}
-                    removeSelectCategory={this.removeSelectCategory}
                     setCategory={this.selectCategory}
-                    isIncomeChecked={isIncomeChecked}
-                    resetSelectedCategory={this.resetSelectedCategory} />
+                    isIncomeChecked={isIncomeChecked} />
             </div>
             <div className="transaction-amount mb-8">
                 <label>Enter Amount:</label>
@@ -127,25 +129,21 @@ export default class Operation extends React.Component {
             </div>
             <div className="transaction-buttons">
                 <div>
-                    <button onClick={this.addIncome} disabled={accountName === ''}>Save</button>
+                    <button onClick={this.addIncome} disabled={amount === ''}>Save</button>
                 </div>
                 <div>
-                    <button>Cancel</button>
+                    <button onClick={this.onCancel}>Cancel</button>
                 </div>
             </div>
         </div>
 
-        return (<div className="operation-list list-group-item">
-            <h3>Account transactions:
-            </h3>
-            <button onClick={this.transactionMenuOpen}>
-                {
-                    isToggleOpen
-                        ? 'Close'
-                        : 'Open'
-                }
-            </button>
-            {accountMenu}
-        </div>)
+        return (
+            <div className="operation-list list-group-item">
+                <h3>Account transactions: </h3>
+                <button onClick={this.transactionMenuOpen}>
+                    {isToggleOpen ? 'Close' : 'Open'}
+                </button>
+                {accountMenu}
+            </div>)
     }
 }

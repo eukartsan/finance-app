@@ -41,7 +41,8 @@ export default class Accounts extends React.Component {
     }
 
     render() {
-        const { accountsList } = this.props, { accountName } = this.state
+        const { accountsList } = this.props,
+            { accountName } = this.state
 
         const account = accountsList
             .filter((item) => item.accountName !== '')

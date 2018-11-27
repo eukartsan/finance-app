@@ -25,7 +25,7 @@ export default class HistoryTransactions extends React.Component {
 
         const transactionHeaderMenu = menuOpen && transactionMenu.map((transactionMenu) => {
             return (
-                <div className="transaction-block-item">
+                <div className="transaction-block-item" key={transactionMenu.datetime}>
                     {transactionItem(transactionMenu.accountName)}
                     {transactionItem(transactionMenu.amount)}
                     {transactionItem(transactionMenu.comment)}
@@ -48,7 +48,7 @@ export default class HistoryTransactions extends React.Component {
                 })
 
                 return (
-                    <div className="transaction-block-item">
+                    <div className="transaction-block-item" key={datetime}>
                         {transactionItem(accountName)}
                         {transactionItem(amount)}
                         {transactionItem(comment)}

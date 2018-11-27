@@ -17,20 +17,12 @@ export default class NewCategory extends React.Component {
         });
     }
 
-    addNewCategory = (label, income) => {
-        this.setState((prevState) => {
-            const categoriesNew = {
-                label,
-                income
-            }
-
-            return {
-                categories: [
-                    ...prevState.categories,
-                    categoriesNew
-                ]
-            };
-        })
+    addNewCategory = (event) => {
+        const { addCategory } = this.props,
+            { categoryName, newIsIncomeChecked } = this.state
+        event.preventDefault()
+        addCategory(categoryName, newIsIncomeChecked)
+        this.setState({ categoryName: ' ' })
     }
 
     categoryMenuOpen = () => {
@@ -46,38 +38,40 @@ export default class NewCategory extends React.Component {
     render() {
         const { menuCategoryOpen, categoryName } = this.state;
 
-        const newCategoryMenu = menuCategoryOpen && <div className="transaction-amount">
-            <label>Enter new category:</label>
-            <input placeholder="Category" name="newCategoryName" type="text" value={categoryName}
-                   onChange={this.handleChange} />
-            <div>
-                <div>
-                    <input type="checkbox" id="income" name="transaction" value="income"
+        const newCategoryMenu = menuCategoryOpen &&
+            <div className="transaction-amount">
+                <form onSubmit={this.addNewCategory}>
+                    <label>Enter new category:</label>
+                    <input
+                        name="newCategoryName"
+                        type="text"
+                        value={categoryName}
+                        className="operation-list"
+                        onChange={this.handleChange} />
+                    <input type="checkbox"
+                           id="incomeCategory"
+                           name="transaction"
+                           value="incomeCategory"
                            onChange={this.newIncomeChange} />
-                    <label htmlFor="income" className="label label-checkbox">
+                    <label htmlFor="incomeCategory"
+                           className="label label-checkbox">
                         Is income?</label>
-                </div>
+                    <button className="transaction-buttons"
+                            type="submit">
+                        Save
+                    </button>
+                </form>
             </div>
-            <div className="transaction-buttons">
-                <button type="submit" value="Submit" onChange={this.addNewCategory}>Save</button>
-            </div>
-        </div>
 
-        return (<div className="operation-list list-group-item">
-            <h3>Create new category:
-            </h3>
-            <button onClick={this.categoryMenuOpen}>
-                {
-                    menuCategoryOpen
-                        ? 'Close'
-                        : 'Open'
-                }
-            </button>
-            <form className="transaction-amount mb-8">
-                <div>
+        return (
+            <div className="operation-list list-group-item">
+                <h3>Create new category:</h3>
+                <button onClick={this.categoryMenuOpen}>
+                    {menuCategoryOpen ? 'Close' : 'Open'}
+                </button>
+                <div className="transaction-amount mb-8">
                     {newCategoryMenu}
                 </div>
-            </form>
-        </div>)
+            </div>)
     }
 }

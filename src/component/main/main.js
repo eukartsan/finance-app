@@ -20,8 +20,8 @@ export default class App extends React.Component {
             transactions: [
                 {
                     accountName: 'Mastercard 1',
-                    datetime: '20-12-83',
-                    amount: 100.12,
+                    datetime: 'Wed Sep 5 2018',
+                    amount: 101,
                     isIncome: false,
                     comment: 'my first income',
                     categoryName: 'Visa 2',
@@ -60,6 +60,21 @@ export default class App extends React.Component {
             };
         })
     }
+
+    addCategory = (categoryName, income) => {
+        this.setState((prevState) => {
+            const categoryObj = {
+                categoryName,
+                id: uuidv4(),
+                income,
+            }
+
+            return {
+                categories: [...prevState.categories, categoryObj]
+            };
+        })
+    }
+
 
     deleteItem = (id) => {
         this.setState((prevState) => {
@@ -111,9 +126,7 @@ export default class App extends React.Component {
 
         return (
             <div className="main-items-lists">
-                <div className="main-items-header">
-                    <h1>Income and expense accounting application</h1>
-                </div>
+                <h1 className="main-items-header">Income and expense accounting application</h1>
                 <div className="main-items-list">
                     <div>
                         <Accounts
@@ -135,17 +148,16 @@ export default class App extends React.Component {
                     <div>
                         <NewCategory
                             categories={categories}
+                            addCategory={this.addCategory}
                         />
                     </div>
                 </div>
-                <div>
-                    <HistoryTransactions
-                        transactions={transactions}
-                        accountsList={accounts}
-                        transactionMenu={transactionMenu}
-                        categories={categories}
-                    />
-                </div>
+                <HistoryTransactions
+                    transactions={transactions}
+                    accountsList={accounts}
+                    transactionMenu={transactionMenu}
+                    categories={categories}
+                />
             </div>
         )
     }
