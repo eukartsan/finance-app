@@ -12,10 +12,10 @@ export default class Accounts extends React.Component {
     }
 
     addAccountName = (event) => {
-        const { addAccount } = this.props,
-            { accountName } = this.state
+        const { addAccount } = this.props
         event.preventDefault()
-        addAccount(accountName)
+        const newAccount = this.accountName.value
+        addAccount(newAccount)
         this.setState({ accountName: '' })
     }
 
@@ -91,6 +91,7 @@ export default class Accounts extends React.Component {
                             <span>Account name:</span>
                             <input name="newAccountName"
                                    type="text"
+                                   ref={(input)=>{this.accountName = input}}
                                    value={accountName}
                                    onChange={this.handleChange} />
                         </label>

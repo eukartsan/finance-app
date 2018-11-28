@@ -23,8 +23,10 @@ export default class Operation extends React.Component {
 
     addIncome = () => {
         const dateTime = (new Date().toDateString())
-        const { amount, comment, isIncomeChecked, categoryName, accountName } = this.state
-        this.props.onAddTransaction(amount, dateTime, comment, isIncomeChecked, categoryName, accountName);
+        const Amount = this.amount.value
+        const Comment = this.comment.value
+        const {isIncomeChecked, categoryName, accountName } = this.state
+        this.props.onAddTransaction(Amount, dateTime, Comment, isIncomeChecked, categoryName, accountName);
         this.resetSelectedAccount()
         this.setState({ amount: '', comment: '' })
     }
@@ -120,6 +122,7 @@ export default class Operation extends React.Component {
                 <label>Enter Amount:</label>
                 <input className="amount-label"
                        placeholder="Amount"
+                       ref={(input)=>{this.amount = input}}
                        value={amount}
                        onChange={this.changeAmount} />
             </div>
@@ -128,13 +131,17 @@ export default class Operation extends React.Component {
                     className="comment-value"
                     placeholder="Comment"
                     rows="3"
+                    ref={(input)=>{this.comment = input}}
                     value={comment}
                     onChange={this.addComment}>
                 </textarea>
             </div>
             <div className="transaction-buttons">
                 <div>
-                    <button onClick={this.addIncome} disabled={amount === ''}>Save</button>
+                    <button
+                        onClick={this.addIncome}
+                        disabled={amount === ''}>Save
+                    </button>
                 </div>
                 <div>
                     <button onClick={this.onCancel}>Cancel</button>

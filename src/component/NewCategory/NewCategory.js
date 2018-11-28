@@ -19,7 +19,8 @@ export default class NewCategory extends React.Component {
 
     addNewCategory = (event) => {
         const { addCategory } = this.props,
-            { categoryName, newIsIncomeChecked } = this.state
+            { newIsIncomeChecked } = this.state
+        const categoryName = this.categoryName.value
         event.preventDefault()
         addCategory(categoryName, newIsIncomeChecked)
         this.setState({ categoryName: ' ' })
@@ -45,6 +46,7 @@ export default class NewCategory extends React.Component {
                     <input
                         name="newCategoryName"
                         type="text"
+                        ref={(input)=>{this.categoryName = input}}
                         value={categoryName}
                         className="operation-list"
                         onChange={this.handleChange} />
