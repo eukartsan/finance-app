@@ -12,13 +12,14 @@ export default class Operation extends React.Component {
             comment: '',
             isIncomeChecked: false,
             isToggleOpen: true,
-            accountName: ''
+            accountName: '',
         }
     }
 
     resetSelectedAccount = () => {
         this.selectedAccount.value = null
     }
+
 
     addIncome = () => {
         const dateTime = (new Date().toDateString())
@@ -29,16 +30,20 @@ export default class Operation extends React.Component {
     }
 
     onCancel = () => {
-        this.setState({ amount: '', comment: ''})
+        this.resetSelectedAccount()
+        this.setState({ amount: '', comment: '' })
     }
 
     accountsList() {
         const { accountsList, accountName } = this.props
         const accountsName = accountsList.map((account) => {
             const { accountName, id } = account;
-            return (<option key={id} data-id={id}>
-                {accountName}
-            </option>)
+            return (
+                <option
+                    key={id}
+                    data-id={id}>
+                    {accountName}
+                </option>)
         })
 
         return (

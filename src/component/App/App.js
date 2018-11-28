@@ -4,7 +4,7 @@ import Accounts from '../Accounts/Accounts';
 import NewCategory from '../NewCategory/NewCategory';
 import uuidv4 from 'uuid/v4';
 import HistoryTransactions from "../HistoryTransactions/HistoryTransactions";
-import './main.css';
+import './App.css';
 
 export default class App extends React.Component {
     constructor() {
@@ -25,6 +25,7 @@ export default class App extends React.Component {
                     isIncome: false,
                     comment: 'my first income',
                     categoryName: 'Visa 2',
+                    id: uuidv4(),
                 },
             ],
             transactionMenu: [
@@ -34,7 +35,8 @@ export default class App extends React.Component {
                     comment: 'Comment',
                     datetime: 'Date',
                     category: 'Category',
-                    income: 'Income or expense'
+                    income: 'Income or expense',
+                    id: uuidv4(),
                 },
             ],
             categories: [
@@ -112,7 +114,8 @@ export default class App extends React.Component {
                 amount,
                 isIncome,
                 comment,
-                categoryName
+                categoryName,
+                id: uuidv4(),
             }
 
             return {
