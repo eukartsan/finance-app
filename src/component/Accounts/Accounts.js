@@ -3,6 +3,14 @@ import './Accounts.css'
 import PropTypes from "prop-types";
 
 export default class Accounts extends React.Component {
+    static propTypes = {
+        accountsList: PropTypes.array.isRequired,
+        addAccount: PropTypes.func.isRequired,
+        onDeleted: PropTypes.func.isRequired,
+        editAccountName: PropTypes.func.isRequired,
+        setAccountActive: PropTypes.func.isRequired
+    }
+
     constructor() {
         super()
 
@@ -104,14 +112,6 @@ export default class Accounts extends React.Component {
                 </ul>
             </div>)
     }
-}
-
-Accounts.propTypes = {
-    accountsList: PropTypes.array.isRequired,
-    addAccount: PropTypes.func.isRequired,
-    onDeleted: PropTypes.func.isRequired,
-    editAccountName: PropTypes.func.isRequired,
-    setAccountActive: PropTypes.func.isRequired,
 }
 
 

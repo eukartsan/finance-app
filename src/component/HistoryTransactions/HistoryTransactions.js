@@ -8,6 +8,13 @@ const transactionItem = (value) =>
     </div>;
 
 export default class HistoryTransactions extends React.Component {
+    static propTypes = {
+        transactions: PropTypes.array.isRequired,
+        accountsList: PropTypes.array.isRequired,
+        transactionMenu: PropTypes.array.isRequired,
+        categories: PropTypes.array.isRequired
+    }
+
     constructor() {
         super()
 
@@ -73,11 +80,4 @@ export default class HistoryTransactions extends React.Component {
             </div>
         )
     }
-}
-
-HistoryTransactions.propTypes = {
-    transactions: PropTypes.array.isRequired,
-    accountsList: PropTypes.array.isRequired,
-    transactionMenu: PropTypes.array.isRequired,
-    categories: PropTypes.array.isRequired,
 }

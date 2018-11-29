@@ -4,6 +4,12 @@ import CategoryAccounts from '../CategoryAccounts/CategoryAccounts';
 import './Operation.css';
 
 export default class Operation extends React.Component {
+    static propTypes = {
+        accountsList: PropTypes.array.isRequired,
+        transactions: PropTypes.array.isRequired,
+        categories: PropTypes.array.isRequired,
+    }
+
     constructor() {
         super()
 
@@ -158,10 +164,4 @@ export default class Operation extends React.Component {
                 {accountMenu}
             </div>)
     }
-}
-
-Operation.propTypes = {
-    accountsList: PropTypes.array.isRequired,
-    transactions: PropTypes.array.isRequired,
-    categories: PropTypes.array.isRequired,
 }
