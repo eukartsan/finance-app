@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from "prop-types";
 import './HistoryTransactions.css'
 
 const transactionItem = (value) =>
@@ -72,4 +73,11 @@ export default class HistoryTransactions extends React.Component {
             </div>
         )
     }
+}
+
+HistoryTransactions.propTypes = {
+    transactions: PropTypes.array.isRequired,
+    accountsList: PropTypes.array.isRequired,
+    transactionMenu: PropTypes.array.isRequired,
+    categories: PropTypes.array.isRequired,
 }

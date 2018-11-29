@@ -1,5 +1,6 @@
 import React from 'react';
 import './CategoryAccounts.css';
+import PropTypes from "prop-types";
 
 export default class CategoryAccounts extends React.Component {
 
@@ -31,4 +32,8 @@ export default class CategoryAccounts extends React.Component {
                 </select>
             </div>)
     }
+}
+
+CategoryAccounts.propTypes = {
+    setCategory: PropTypes.func.isRequired,
 }

@@ -1,5 +1,6 @@
 import React from 'react'
 import './Accounts.css'
+import PropTypes from "prop-types";
 
 export default class Accounts extends React.Component {
     constructor() {
@@ -104,3 +105,13 @@ export default class Accounts extends React.Component {
             </div>)
     }
 }
+
+Accounts.propTypes = {
+    accountsList: PropTypes.array.isRequired,
+    addAccount: PropTypes.func.isRequired,
+    onDeleted: PropTypes.func.isRequired,
+    editAccountName: PropTypes.func.isRequired,
+    setAccountActive: PropTypes.func.isRequired,
+}
+
+

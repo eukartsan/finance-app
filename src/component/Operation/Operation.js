@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types'
 import CategoryAccounts from '../CategoryAccounts/CategoryAccounts';
 import './Operation.css';
 
@@ -19,7 +20,6 @@ export default class Operation extends React.Component {
     resetSelectedAccount = () => {
         this.selectedAccount.value = null
     }
-
 
     addIncome = () => {
         const dateTime = (new Date().toDateString())
@@ -158,4 +158,10 @@ export default class Operation extends React.Component {
                 {accountMenu}
             </div>)
     }
+}
+
+Operation.propTypes = {
+    accountsList: PropTypes.array.isRequired,
+    transactions: PropTypes.array.isRequired,
+    categories: PropTypes.array.isRequired,
 }

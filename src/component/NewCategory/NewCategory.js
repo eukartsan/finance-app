@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from "prop-types";
 
 export default class NewCategory extends React.Component {
     constructor() {
@@ -76,4 +77,9 @@ export default class NewCategory extends React.Component {
                 </div>
             </div>)
     }
+}
+
+NewCategory.propTypes = {
+    categories: PropTypes.array.isRequired,
+    addCategory: PropTypes.func.isRequired,
 }
